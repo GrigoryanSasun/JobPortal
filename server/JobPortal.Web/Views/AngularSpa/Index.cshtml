@@ -1,0 +1,27 @@
+﻿@model JobPortal.Web.ViewModels.AngularSpaResponseViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    @foreach (var styleUrl in Model.StylesheetUrls)
+    {
+        <link rel="stylesheet" type="text/css" href="@styleUrl" />
+    }
+    <title>Job portal application</title>
+</head>
+<body>
+    <app></app>
+
+    <!-- Client side scripts -->
+    @foreach (var scriptUrl in Model.JavascriptUrls)
+    {
+        <script type="text/javascript" src="@scriptUrl"></script>
+    }
+</body>
+</html>
