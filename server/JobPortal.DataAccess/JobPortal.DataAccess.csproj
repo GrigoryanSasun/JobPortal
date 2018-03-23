@@ -62,12 +62,17 @@
     <Compile Include="Migrations\201803231842315_CreateJobTitleTable.Designer.cs">
       <DependentUpon>201803231842315_CreateJobTitleTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803231851371_CreateLocationTable.cs" />
+    <Compile Include="Migrations\201803231851371_CreateLocationTable.Designer.cs">
+      <DependentUpon>201803231851371_CreateLocationTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Base\ModelBase.cs" />
     <Compile Include="Model\Base\NamedModelBase.cs" />
     <Compile Include="Model\EmploymentType.cs" />
     <Compile Include="Model\JobCategory.cs" />
     <Compile Include="Model\JobTitle.cs" />
+    <Compile Include="Model\Location.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +94,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803231842315_CreateJobTitleTable.resx">
       <DependentUpon>201803231842315_CreateJobTitleTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803231851371_CreateLocationTable.resx">
+      <DependentUpon>201803231851371_CreateLocationTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

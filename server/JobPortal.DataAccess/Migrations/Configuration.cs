@@ -47,6 +47,17 @@ namespace JobPortal.DataAccess.Migrations
                 new JobTitle { Name = "CTO" });
         }
 
+        private void SeedLocations(JobPortalDbContext context)
+        {
+            context.Locations.AddOrUpdate(
+                l => l.Address,
+                new Location { Address = "Yerevan, Armenia" },
+                new Location { Address = "San Francisco, CA, US" },
+                new Location { Address = "Chester, CA, US" },
+                new Location { Address = "Birmingham, IA, US" }
+            );
+        }
+
         protected override void Seed(JobPortalDbContext context)
         {
             //  This method will be called after migrating to the latest version.
@@ -56,6 +67,7 @@ namespace JobPortal.DataAccess.Migrations
             this.SeedEmploymentTypes(context);
             this.SeedJobCategories(context);
             this.SeedJobTitles(context);
+            this.SeedLocations(context);
             context.SaveChanges();
         }
     }
