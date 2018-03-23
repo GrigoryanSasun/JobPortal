@@ -11,6 +11,7 @@ namespace JobPortal.DataAccess
         public const string SchemaName = "dbo";
         public const string EmploymentTypeTableName = "EmploymentType";
         public const string JobCategoryTableName = "JobCategory";
+        public const string JobTitleTableName = "JobTitle";
 
         public static string GetTableNameWithSchema(string tableName)
         {

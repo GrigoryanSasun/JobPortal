@@ -36,6 +36,17 @@ namespace JobPortal.DataAccess.Migrations
                 new JobCategory { Name = "Other IT / tech" });
         }
 
+        private void SeedJobTitles(JobPortalDbContext context)
+        {
+            context.JobTitles.AddOrUpdate(
+                jt => jt.Name,
+                new JobTitle { Name = "Senior Web Developer" },
+                new JobTitle { Name = "Software Engineer" },
+                new JobTitle { Name = "Senior Full-stack developer" },
+                new JobTitle { Name = "Junior QA Engineer" },
+                new JobTitle { Name = "CTO" });
+        }
+
         protected override void Seed(JobPortalDbContext context)
         {
             //  This method will be called after migrating to the latest version.
@@ -44,6 +55,7 @@ namespace JobPortal.DataAccess.Migrations
             //  to avoid creating duplicate seed data.
             this.SeedEmploymentTypes(context);
             this.SeedJobCategories(context);
+            this.SeedJobTitles(context);
             context.SaveChanges();
         }
     }
