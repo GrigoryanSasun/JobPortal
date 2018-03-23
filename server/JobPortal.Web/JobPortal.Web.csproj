@@ -146,6 +146,24 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JobPortal.Business.Core\JobPortal.Business.Core.csproj">
+      <Project>{353d9554-e9b8-425e-b265-b4d7ee702b1e}</Project>
+      <Name>JobPortal.Business.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JobPortal.Business\JobPortal.Business.csproj">
+      <Project>{c9ae6c2a-9bfd-4a74-8d56-7d03be13f3a8}</Project>
+      <Name>JobPortal.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JobPortal.DataAccess.Core\JobPortal.DataAccess.Core.csproj">
+      <Project>{e529ec67-2baa-41fb-a03a-72685d531bcb}</Project>
+      <Name>JobPortal.DataAccess.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JobPortal.DataAccess\JobPortal.DataAccess.csproj">
+      <Project>{fd7a96a3-26ae-436e-b055-e55f9dff9d45}</Project>
+      <Name>JobPortal.DataAccess</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
