@@ -25,6 +25,17 @@ namespace JobPortal.DataAccess.Migrations
                 new EmploymentType { Name = "Seasonal / Temp" });
         }
 
+        private void SeedJobCategories(JobPortalDbContext context)
+        {
+            context.JobCategories.AddOrUpdate(
+                jc => jc.Name,
+                new JobCategory { Name = "Software development" },
+                new JobCategory { Name = "Quality assurance" },
+                new JobCategory { Name = "Web / Graphic design" },
+                new JobCategory { Name = "Product / Project management" },
+                new JobCategory { Name = "Other IT / tech" });
+        }
+
         protected override void Seed(JobPortalDbContext context)
         {
             //  This method will be called after migrating to the latest version.
@@ -32,6 +43,7 @@ namespace JobPortal.DataAccess.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
             this.SeedEmploymentTypes(context);
+            this.SeedJobCategories(context);
             context.SaveChanges();
         }
     }

@@ -13,7 +13,7 @@ namespace JobPortal.DataAccess.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201803231720277_CreateEmploymentTypeTable"; }
+            get { return "201803231832170_CreateEmploymentTypeTable"; }
         }
         
         string IMigrationMetadata.Source

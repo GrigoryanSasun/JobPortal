@@ -11,6 +11,7 @@ namespace JobPortal.Context
     class JobPortalDbContext : DbContext
     {
         public DbSet<EmploymentType> EmploymentTypes { get; set; }
+        public DbSet<JobCategory> JobCategories { get; set; }
 
         public JobPortalDbContext(): base("DbConnectionString")
         {

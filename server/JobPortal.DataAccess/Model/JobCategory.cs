@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace JobPortal.DataAccess.Model
 {
-    [Table(name: DbHelpers.EmploymentTypeTableName, Schema = DbHelpers.SchemaName)]
-    class EmploymentType : NamedModelBase
+    [Table(name: DbHelpers.JobCategoryTableName, Schema = DbHelpers.SchemaName)]
+    class JobCategory : NamedModelBase
     {
     }
 }
