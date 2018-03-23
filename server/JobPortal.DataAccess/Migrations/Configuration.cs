@@ -3,12 +3,15 @@ namespace JobPortal.DataAccess.Migrations
     using JobPortal.Context;
     using JobPortal.DataAccess.Model;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<JobPortalDbContext>
     {
+        private readonly int _jobPostSeedCount = 25;
+
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
@@ -58,6 +61,39 @@ namespace JobPortal.DataAccess.Migrations
             );
         }
 
+        private void SeedJobPosts(JobPortalDbContext context)
+        {
+            var jobPostCount = context.JobPosts.Count();
+            var missingJobPostCount = this._jobPostSeedCount - jobPostCount;
+            if (missingJobPostCount > 0)
+            {
+                var rnd = new Random();
+                var employmentTypes = context.EmploymentTypes.ToList();
+                var jobCategories = context.JobCategories.ToList();
+                var jobTitles = context.JobTitles.ToList();
+                var locations = context.Locations.ToList();
+                for (int i = 0; i < missingJobPostCount; i++)
+                {
+                    var employmentIndex = rnd.Next(0, employmentTypes.Count);
+                    var jobCategoryIndex = rnd.Next(0, jobCategories.Count);
+                    var jobTitleIndex = rnd.Next(0, jobTitles.Count);
+                    var locationIndex = rnd.Next(0, locations.Count);
+                    var randomDayCount = rnd.Next(0, 10);
+                    var jobPost = new JobPost
+                    {
+                        EmploymentTypeId = employmentTypes[employmentIndex].Id,
+                        CategoryId = jobCategories[jobCategoryIndex].Id,
+                        TitleId = jobTitles[jobTitleIndex].Id,
+                        LocationId = locations[locationIndex].Id,
+                        IsBookmarked = false,
+                        CreatedAt = DateTime.UtcNow.AddDays(randomDayCount)
+                    };
+                    context.JobPosts.Add(jobPost);
+                }
+                context.SaveChanges();
+            }
+        }
+
         protected override void Seed(JobPortalDbContext context)
         {
             //  This method will be called after migrating to the latest version.
@@ -68,6 +104,9 @@ namespace JobPortal.DataAccess.Migrations
             this.SeedJobCategories(context);
             this.SeedJobTitles(context);
             this.SeedLocations(context);
+            context.SaveChanges();
+
+            this.SeedJobPosts(context);
             context.SaveChanges();
         }
     }
