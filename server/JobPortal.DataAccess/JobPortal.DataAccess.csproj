@@ -70,6 +70,10 @@
     <Compile Include="Migrations\201803231904488_CreateJobPostTable.Designer.cs">
       <DependentUpon>201803231904488_CreateJobPostTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803232041001_CreateJobPostsView.cs" />
+    <Compile Include="Migrations\201803232041001_CreateJobPostsView.Designer.cs">
+      <DependentUpon>201803232041001_CreateJobPostsView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Base\ModelBase.cs" />
     <Compile Include="Model\Base\NamedModelBase.cs" />
@@ -105,6 +109,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803231904488_CreateJobPostTable.resx">
       <DependentUpon>201803231904488_CreateJobPostTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803232041001_CreateJobPostsView.resx">
+      <DependentUpon>201803232041001_CreateJobPostsView.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -17,5 +17,6 @@ namespace JobPortal.DataAccess.Model
         public int LocationId { get; set; }
         public bool IsBookmarked { get; set; }
         public DateTime CreatedAt { get; set; }
+        public int Views { get; set; }
     }
 }

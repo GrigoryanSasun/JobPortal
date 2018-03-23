@@ -61,6 +61,7 @@ namespace JobPortal.DataAccess.Migrations
                         TitleId = c.Int(nullable: false),
                         LocationId = c.Int(nullable: false),
                         IsBookmarked = c.Boolean(nullable: false),
+                        Views = c.Int(nullable: false),
                         CreatedAt = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);

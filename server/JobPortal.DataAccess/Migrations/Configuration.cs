@@ -79,6 +79,7 @@ namespace JobPortal.DataAccess.Migrations
                     var jobTitleIndex = rnd.Next(0, jobTitles.Count);
                     var locationIndex = rnd.Next(0, locations.Count);
                     var randomDayCount = rnd.Next(0, 10);
+                    var randomViewCount = rnd.Next(0, 1001);
                     var jobPost = new JobPost
                     {
                         EmploymentTypeId = employmentTypes[employmentIndex].Id,
@@ -86,6 +87,7 @@ namespace JobPortal.DataAccess.Migrations
                         TitleId = jobTitles[jobTitleIndex].Id,
                         LocationId = locations[locationIndex].Id,
                         IsBookmarked = false,
+                        Views = randomViewCount,
                         CreatedAt = DateTime.UtcNow.AddDays(randomDayCount)
                     };
                     context.JobPosts.Add(jobPost);
