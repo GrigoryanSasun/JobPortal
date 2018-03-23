@@ -66,11 +66,16 @@
     <Compile Include="Migrations\201803231851371_CreateLocationTable.Designer.cs">
       <DependentUpon>201803231851371_CreateLocationTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803231904488_CreateJobPostTable.cs" />
+    <Compile Include="Migrations\201803231904488_CreateJobPostTable.Designer.cs">
+      <DependentUpon>201803231904488_CreateJobPostTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Base\ModelBase.cs" />
     <Compile Include="Model\Base\NamedModelBase.cs" />
     <Compile Include="Model\EmploymentType.cs" />
     <Compile Include="Model\JobCategory.cs" />
+    <Compile Include="Model\JobPost.cs" />
     <Compile Include="Model\JobTitle.cs" />
     <Compile Include="Model\Location.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -97,6 +102,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803231851371_CreateLocationTable.resx">
       <DependentUpon>201803231851371_CreateLocationTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803231904488_CreateJobPostTable.resx">
+      <DependentUpon>201803231904488_CreateJobPostTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -7,7 +7,7 @@ namespace JobPortal.DataAccess.Migrations
     {
         private readonly string _tableName = DbHelpers.GetTableNameWithSchema(DbHelpers.JobCategoryTableName);
         private readonly string _nameColumn = "Name";
-        private readonly string _uniqueNameIndex = "UX_JobCategoryName";
+        private readonly string _uniqueNameIndex = DbHelpers.GetIndexPrefixedName("JobCategoryName", isUnique: true);
         private readonly int _jobCategoryNameMaxLength = 100;
 
         public override void Up()

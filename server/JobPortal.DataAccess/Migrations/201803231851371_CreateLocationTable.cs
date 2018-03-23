@@ -7,7 +7,7 @@ namespace JobPortal.DataAccess.Migrations
     {
         private readonly string _tableName = DbHelpers.GetTableNameWithSchema(DbHelpers.LocationTableName);
         private readonly string _addressColumn = "Address";
-        private readonly string _uniqueAddressIndex = "UX_Address";
+        private readonly string _uniqueAddressIndex = DbHelpers.GetIndexPrefixedName("Address", isUnique: true);
         private readonly int _addressMaxLength = 300;
 
         public override void Up()
