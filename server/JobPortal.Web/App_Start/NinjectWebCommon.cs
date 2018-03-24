@@ -13,6 +13,12 @@ namespace JobPortal.Web.App_Start
     using Ninject.Web.WebApi;
 
     using Ninject.Web.Common.WebHost;
+    using AutoMapper;
+    using JobPortal.Web.App_Start.AutoMapperProfiles;
+    using JobPortal.Business.Core.Contract;
+    using JobPortal.Business.Service;
+    using JobPortal.DataAccess.Core.Contract;
+    using JobPortal.DataAccess.Repository;
 
     public static class NinjectWebCommon 
     {
@@ -58,11 +64,38 @@ namespace JobPortal.Web.App_Start
             }
         }
 
+        private static void RegisterAutoMapper(IKernel kernel)
+        {
+            kernel.Bind<IMapper>().ToMethod((ctx) =>
+            {
+                var config = new MapperConfiguration(cfg => {
+                    cfg.AddProfile<WebBusinessProfile>();
+                    cfg.AddProfile<BusinessDataAccessProfile>();
+                });
+                var mapper = new Mapper(config);
+                return mapper;
+            }).InSingletonScope();
+        }
+
+        private static void RegisterBusinessServices(IKernel kernel)
+        {
+            kernel.Bind<IJobPostService>().To<JobPostService>().InSingletonScope();
+        }
+
+        private static void RegisterDataAccessServices(IKernel kernel)
+        {
+            kernel.Bind<IJobPostRepository>().To<JobPostRepository>().InSingletonScope();
+        }
+
         /// <summary>
         /// Load your modules or register your services here!
         /// </summary>
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
-        {}        
+        {
+            RegisterAutoMapper(kernel);
+            RegisterBusinessServices(kernel);
+            RegisterDataAccessServices(kernel);
+        }        
     }
 }

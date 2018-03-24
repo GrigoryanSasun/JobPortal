@@ -74,6 +74,10 @@
     <Compile Include="Migrations\201803241649151_CreateFullTextIndexes.Designer.cs">
       <DependentUpon>201803241649151_CreateFullTextIndexes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803242124397_AddJobPostThumbnailUrlToJobPostsTable.cs" />
+    <Compile Include="Migrations\201803242124397_AddJobPostThumbnailUrlToJobPostsTable.Designer.cs">
+      <DependentUpon>201803242124397_AddJobPostThumbnailUrlToJobPostsTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Base\ModelBase.cs" />
     <Compile Include="Model\Base\NamedModelBase.cs" />
@@ -83,8 +87,13 @@
     <Compile Include="Model\JobTitle.cs" />
     <Compile Include="Model\Location.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\JobPostRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\JobPortal.Common\JobPortal.Common.csproj">
+      <Project>{8e364486-9d7f-4c53-8b7e-d26b5b06ec80}</Project>
+      <Name>JobPortal.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JobPortal.DataAccess.Core\JobPortal.DataAccess.Core.csproj">
       <Project>{e529ec67-2baa-41fb-a03a-72685d531bcb}</Project>
       <Name>JobPortal.DataAccess.Core</Name>
@@ -112,6 +121,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803241649151_CreateFullTextIndexes.resx">
       <DependentUpon>201803241649151_CreateFullTextIndexes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803242124397_AddJobPostThumbnailUrlToJobPostsTable.resx">
+      <DependentUpon>201803242124397_AddJobPostThumbnailUrlToJobPostsTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using JobPortal.Web.ViewModels;
+using JobPortal.Web.ViewModel;
 using Newtonsoft.Json;
 
 namespace JobPortal.Web.Controllers

@@ -18,5 +18,6 @@ namespace JobPortal.DataAccess.Model
         public bool IsBookmarked { get; set; }
         public DateTime CreatedAt { get; set; }
         public int Views { get; set; }
+        public string JobPostThumbnailUrl { get; set; }
     }
 }

@@ -40,7 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contract\IJobPostRepository.cs" />
+    <Compile Include="Model\RepositoryJobPostResult.cs" />
+    <Compile Include="Model\RepositoryJobPostSearchInputModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JobPortal.Common\JobPortal.Common.csproj">
+      <Project>{8e364486-9d7f-4c53-8b7e-d26b5b06ec80}</Project>
+      <Name>JobPortal.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -30,8 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,16 +45,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\JobPostService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JobPortal.Business.Core\JobPortal.Business.Core.csproj">
       <Project>{353d9554-e9b8-425e-b265-b4d7ee702b1e}</Project>
       <Name>JobPortal.Business.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\JobPortal.Common\JobPortal.Common.csproj">
+      <Project>{8e364486-9d7f-4c53-8b7e-d26b5b06ec80}</Project>
+      <Name>JobPortal.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JobPortal.DataAccess.Core\JobPortal.DataAccess.Core.csproj">
       <Project>{e529ec67-2baa-41fb-a03a-72685d531bcb}</Project>
       <Name>JobPortal.DataAccess.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

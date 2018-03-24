@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobPortal.DataAccess", "Job
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobPortal.DataAccess.Core", "JobPortal.DataAccess.Core\JobPortal.DataAccess.Core.csproj", "{E529EC67-2BAA-41FB-A03A-72685D531BCB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobPortal.Common", "JobPortal.Common\JobPortal.Common.csproj", "{8E364486-9D7F-4C53-8B7E-D26B5B06EC80}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{E529EC67-2BAA-41FB-A03A-72685D531BCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E529EC67-2BAA-41FB-A03A-72685D531BCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E529EC67-2BAA-41FB-A03A-72685D531BCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E364486-9D7F-4C53-8B7E-D26B5B06EC80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E364486-9D7F-4C53-8B7E-D26B5B06EC80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E364486-9D7F-4C53-8B7E-D26B5B06EC80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E364486-9D7F-4C53-8B7E-D26B5B06EC80}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

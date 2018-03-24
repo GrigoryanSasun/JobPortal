@@ -72,6 +72,12 @@ namespace JobPortal.DataAccess.Migrations
                 var jobCategories = context.JobCategories.ToList();
                 var jobTitles = context.JobTitles.ToList();
                 var locations = context.Locations.ToList();
+                var imageUrls = new string[]
+                {
+                    "https://i.forbesimg.com/media/lists/companies/dell_416x416.jpg",
+                    "https://acclaim-production-app.s3.amazonaws.com/images/854d76bf-4f74-4d51-98a0-d969214bfba7/large_IBM%2BLogo%2Bfor%2BAcclaim%2BProfile.png",
+                    "https://s3-eu-west-1.amazonaws.com/jobbio-production/topic/benivo-836047844-logo.jpg"
+                };
                 for (int i = 0; i < missingJobPostCount; i++)
                 {
                     var employmentIndex = rnd.Next(0, employmentTypes.Count);
@@ -80,6 +86,7 @@ namespace JobPortal.DataAccess.Migrations
                     var locationIndex = rnd.Next(0, locations.Count);
                     var randomDayCount = rnd.Next(0, 10);
                     var randomViewCount = rnd.Next(0, 1001);
+                    var randomImageIndex = rnd.Next(0, imageUrls.Length);
                     var jobPost = new JobPost
                     {
                         EmploymentTypeId = employmentTypes[employmentIndex].Id,
@@ -88,6 +95,7 @@ namespace JobPortal.DataAccess.Migrations
                         LocationId = locations[locationIndex].Id,
                         IsBookmarked = false,
                         Views = randomViewCount,
+                        JobPostThumbnailUrl = imageUrls[randomImageIndex],
                         CreatedAt = DateTime.UtcNow.AddDays(randomDayCount)
                     };
                     context.JobPosts.Add(jobPost);
