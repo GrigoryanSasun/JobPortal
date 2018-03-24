@@ -14,6 +14,17 @@ namespace JobPortal.DataAccess.Repository
 {
     public class JobPostRepository : IJobPostRepository
     {
+        private void AppendIdListCheckIfNotEmpty(StringBuilder sb, string tableNameAndColumn, int[] ids)
+        {
+            if ((ids != null) && (ids.Length > 0))
+            {
+                string idsConcatenated = DbHelpers.GetCommaSeparatedList<int>(ids);
+                sb.AppendFormat(string.Format(@"
+                        AND ({0} IN ({1}))
+                ", tableNameAndColumn, idsConcatenated));
+            }
+        }
+
         private string GetBaseJobPostQuery(string selectStatement, RepositoryJobPostSearchInputModel searchInputModel, out object[] sqlParams)
         {
             var sqlListParams = new List<object>();
@@ -58,6 +69,10 @@ namespace JobPortal.DataAccess.Repository
                     sqlListParams.Add(new SqlParameter("keyword", keyword));
                 }
             }
+            this.AppendIdListCheckIfNotEmpty(sbQuery, "jc.Id", searchInputModel.CategoryIds);
+            this.AppendIdListCheckIfNotEmpty(sbQuery, "et.Id", searchInputModel.EmploymentTypeIds);
+            this.AppendIdListCheckIfNotEmpty(sbQuery, "l.Id", searchInputModel.LocationIds);
+
             sqlParams = sqlListParams.ToArray();
             return sbQuery.ToString();
         }

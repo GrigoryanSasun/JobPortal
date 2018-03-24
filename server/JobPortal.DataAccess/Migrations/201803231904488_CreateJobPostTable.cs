@@ -1,5 +1,6 @@
 namespace JobPortal.DataAccess.Migrations
 {
+    using JobPortal.DataAccess.Helpers;
     using System;
     using System.Data.Entity.Migrations;
     

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JobPortal.DataAccess
+namespace JobPortal.DataAccess.Helpers
 {
     static class DbHelpers
     {
@@ -33,6 +33,11 @@ namespace JobPortal.DataAccess
         {
             string prefix = isUnique ? "UX" : "IX";
             return prefix + "_" + name;
+        }
+
+        public static string GetCommaSeparatedList<T>(IEnumerable<T> items)
+        {
+            return string.Join(",", items);
         }
     }
 }

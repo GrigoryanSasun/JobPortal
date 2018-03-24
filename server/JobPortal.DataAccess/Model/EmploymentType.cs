@@ -1,4 +1,5 @@
-﻿using JobPortal.DataAccess.Model.Base;
+﻿using JobPortal.DataAccess.Helpers;
+using JobPortal.DataAccess.Model.Base;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JobPortal.DataAccess.Helpers
 {
-    class FulltextHelper
+    static class FulltextHelper
     {
         public static string PreprocessForFulltextSearch(string keyword)
         {
