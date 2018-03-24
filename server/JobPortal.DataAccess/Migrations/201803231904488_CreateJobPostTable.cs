@@ -14,6 +14,8 @@ namespace JobPortal.DataAccess.Migrations
         private readonly string _jobCategoryColumn;
         private readonly string _jobTitleColumn;
         private readonly string _locationColumn;
+        private readonly string _viewsColumn;
+        private readonly string _createdAtColumn;
         private readonly string _employmentTypeTable;
         private readonly string _jobCategoryTable;
         private readonly string _jobTitleTable;
@@ -22,6 +24,9 @@ namespace JobPortal.DataAccess.Migrations
         private readonly string _jobCategoryForeignKeyName;
         private readonly string _jobTitleForeignKeyName;
         private readonly string _locationForeignKeyName;
+
+        private readonly string _viewsIndexName;
+        private readonly string _createdAtIndexName;
 
 
         private void AddForeignKeyWithIndex(
@@ -93,14 +98,22 @@ namespace JobPortal.DataAccess.Migrations
                 this._locationForeignKeyName,
                 this._locationIndex
             );
+
+            CreateIndex(
+                table: this._tableName,
+                column: this._viewsColumn,
+                name: this._viewsIndexName
+            );
+
+            CreateIndex(
+                table: this._tableName,
+                column: this._createdAtColumn,
+                name: this._createdAtIndexName
+            );
         }
         
         public override void Down()
         {
-            DropTableIndex(this._employmentTypeIndex);
-            DropTableIndex(this._jobCategoryIndex);
-            DropTableIndex(this._jobTitleIndex);
-            DropTableIndex(this._locationIndex);
             DropTable(this._tableName);
         }
 
@@ -110,6 +123,8 @@ namespace JobPortal.DataAccess.Migrations
             this._jobCategoryColumn = "CategoryId";
             this._jobTitleColumn = "TitleId";
             this._locationColumn = "LocationId";
+            this._viewsColumn = "Views";
+            this._createdAtColumn = "CreatedAt";
             this._employmentTypeIndex = DbHelpers.GetIndexPrefixedName("EmploymentType");
             this._jobCategoryIndex = DbHelpers.GetIndexPrefixedName("JobCategory");
             this._jobTitleIndex = DbHelpers.GetIndexPrefixedName("JobTitle");
@@ -122,6 +137,8 @@ namespace JobPortal.DataAccess.Migrations
             this._jobCategoryForeignKeyName = DbHelpers.GetForeignKeyName(this._tableName, this._jobCategoryTable);
             this._jobTitleForeignKeyName = DbHelpers.GetForeignKeyName(this._tableName, this._jobTitleTable);
             this._locationForeignKeyName = DbHelpers.GetForeignKeyName(this._tableName, this._locationTable);
+            this._viewsIndexName = DbHelpers.GetIndexPrefixedName("Views");
+            this._createdAtIndexName = DbHelpers.GetIndexPrefixedName("CreatedAt");
         }
     }
 }

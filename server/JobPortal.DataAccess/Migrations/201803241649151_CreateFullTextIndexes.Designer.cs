@@ -7,13 +7,13 @@ namespace JobPortal.DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class CreateJobPostsView : IMigrationMetadata
+    public sealed partial class CreateFullTextIndexes : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateJobPostsView));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateFullTextIndexes));
         
         string IMigrationMetadata.Id
         {
-            get { return "201803232041001_CreateJobPostsView"; }
+            get { return "201803241649151_CreateFullTextIndexes"; }
         }
         
         string IMigrationMetadata.Source

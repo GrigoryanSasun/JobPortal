@@ -7,7 +7,7 @@ namespace JobPortal.DataAccess.Migrations
     {
         private readonly string _tableName = DbHelpers.GetTableNameWithSchema(DbHelpers.LocationTableName);
         private readonly string _addressColumn = "Address";
-        private readonly string _uniqueAddressIndex = DbHelpers.GetIndexPrefixedName("Address", isUnique: true);
+        private readonly string _uniqueAddressIndex = DbHelpers.LocationUniqueAddressIndex;
         private readonly int _addressMaxLength = 300;
 
         public override void Up()
@@ -30,7 +30,6 @@ namespace JobPortal.DataAccess.Migrations
 
         public override void Down()
         {
-            DropIndex(this._tableName, this._uniqueAddressIndex);
             DropTable(this._tableName);
         }
     }

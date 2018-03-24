@@ -31,7 +31,6 @@ namespace JobPortal.DataAccess.Migrations
 
         public override void Down()
         {
-            DropIndex(this._tableName, this._uniqueNameIndex);
             DropTable(this._tableName);
         }
     }

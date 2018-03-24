@@ -7,7 +7,7 @@ namespace JobPortal.DataAccess.Migrations
     {
         private readonly string _tableName = DbHelpers.GetTableNameWithSchema(DbHelpers.JobCategoryTableName);
         private readonly string _nameColumn = "Name";
-        private readonly string _uniqueNameIndex = DbHelpers.GetIndexPrefixedName("JobCategoryName", isUnique: true);
+        private readonly string _uniqueNameIndex = DbHelpers.JobCategoryUniqueNameIndex;
         private readonly int _jobCategoryNameMaxLength = 100;
 
         public override void Up()
@@ -30,7 +30,6 @@ namespace JobPortal.DataAccess.Migrations
 
         public override void Down()
         {
-            DropIndex(this._tableName, this._uniqueNameIndex);
             DropTable(this._tableName);
         }
     }

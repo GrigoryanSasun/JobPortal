@@ -15,6 +15,10 @@ namespace JobPortal.DataAccess
         public const string LocationTableName = "Location";
         public const string JobPostsTableName = "JobPost";
 
+        public static readonly string JobCategoryUniqueNameIndex = DbHelpers.GetIndexPrefixedName("JobCategoryName", isUnique: true);
+        public static readonly string JobTitleUniqueNameIndex = DbHelpers.GetIndexPrefixedName("JobTitleName", isUnique: true);
+        public static readonly string LocationUniqueAddressIndex = DbHelpers.GetIndexPrefixedName("Address", isUnique: true);
+
         public static string GetTableNameWithSchema(string tableName)
         {
             return SchemaName + "." + tableName;
