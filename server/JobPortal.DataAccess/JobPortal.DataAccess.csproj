@@ -50,6 +50,7 @@
     <Compile Include="Context\JobPortalDbContext.cs" />
     <Compile Include="DbHelpers.cs" />
     <Compile Include="DbSetup.cs" />
+    <Compile Include="Helpers\FulltextHelper.cs" />
     <Compile Include="Migrations\201803231832170_CreateEmploymentTypeTable.cs" />
     <Compile Include="Migrations\201803231832170_CreateEmploymentTypeTable.Designer.cs">
       <DependentUpon>201803231832170_CreateEmploymentTypeTable.cs</DependentUpon>
