@@ -25,7 +25,7 @@ namespace JobPortal.DataAccess.Repository
             }
         }
 
-        private string GetBaseJobPostQuery(string selectStatement, RepositoryJobPostSearchInputModel searchInputModel, out object[] sqlParams)
+        private string GetBaseJobPostQuery(string selectStatement, RepositoryJobPostSearchInputModel searchInputModel, bool shouldSort, out object[] sqlParams)
         {
             var sqlListParams = new List<object>();
             StringBuilder sbQuery = new StringBuilder(string.Format(@"
@@ -36,9 +36,9 @@ namespace JobPortal.DataAccess.Repository
                 JOIN {4} jt ON jp.TitleId = jt.Id
                 JOIN {5} l ON jp.LocationId = l.Id
                 WHERE 1=1
-            ", 
+            ",
             selectStatement,
-            DbHelpers.JobPostsTableName, 
+            DbHelpers.JobPostsTableName,
             DbHelpers.EmploymentTypeTableName,
             DbHelpers.JobCategoryTableName,
             DbHelpers.JobTitleTableName,
@@ -73,6 +73,33 @@ namespace JobPortal.DataAccess.Repository
             this.AppendIdListCheckIfNotEmpty(sbQuery, "et.Id", searchInputModel.EmploymentTypeIds);
             this.AppendIdListCheckIfNotEmpty(sbQuery, "l.Id", searchInputModel.LocationIds);
 
+            if (shouldSort)
+            {
+                var sortOrder = searchInputModel.SortOrder;
+
+                if (sortOrder == null)
+                {
+                    sortOrder = JobPortal.Common.Model.SortOrder.ByCreatedDate;
+                }
+
+                string sortColumnName = "";
+                if (sortOrder == JobPortal.Common.Model.SortOrder.ByViews)
+                {
+                    sortColumnName = "jp.Views";
+                }
+                else
+                {
+                    sortColumnName = "jp.CreatedAt";
+                }
+                sbQuery.AppendFormat(@"
+                        ORDER BY {0} DESC
+                        OFFSET {1} ROWS
+                        FETCH NEXT {2} ROWS ONLY
+                    ", 
+                    sortColumnName,
+                    searchInputModel.Skip,
+                    searchInputModel.Take);
+            }
             sqlParams = sqlListParams.ToArray();
             return sbQuery.ToString();
         }
@@ -83,7 +110,7 @@ namespace JobPortal.DataAccess.Repository
             {
                 string selectStatement = "SELECT COUNT(*)";
                 object[] sqlParams = null;
-                string query = GetBaseJobPostQuery(selectStatement, searchInputModel, out sqlParams);
+                string query = GetBaseJobPostQuery(selectStatement, searchInputModel, shouldSort: false, sqlParams: out sqlParams);
                 var postCount = jobPortalDbContext.Database.SqlQuery<int>(query, sqlParams).First();
                 return postCount;
             }
@@ -95,7 +122,7 @@ namespace JobPortal.DataAccess.Repository
             {
                 string selectStatement = "SELECT jp.Id AS Id, jp.IsBookmarked, jp.JobPostThumbnailUrl, jp.Views, jp.CreatedAt, et.Name AS EmploymentType, jc.Name AS JobCategory, jt.Name AS Title, l.Address AS Location";
                 object[] sqlParams = null;
-                string query = GetBaseJobPostQuery(selectStatement, searchInputModel, out sqlParams);
+                string query = GetBaseJobPostQuery(selectStatement, searchInputModel, shouldSort: true, sqlParams: out sqlParams);
                 var result = jobPortalDbContext.Database.SqlQuery<RepositoryJobPostResult>(query, sqlParams).ToList();
                 return result;
             }
