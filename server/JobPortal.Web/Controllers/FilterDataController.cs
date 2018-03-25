@@ -12,8 +12,10 @@ using System.Web.Http;
 
 namespace JobPortal.Web.Controllers
 {
+    [RoutePrefix("api/filterdata")]
     public class FilterDataController : ApiControllerBase
     {
+        [Route("{*pathvalue}")]
         public IHttpActionResult GetFilterData([FromUri]AppJobPostSearchInputModel searchInputModel)
         {
             var serviceInputModel = this._modelMapper.Map<AppJobPostSearchInputModel, ServiceJobPostSearchInputModel>(

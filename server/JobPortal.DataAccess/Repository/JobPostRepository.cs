@@ -3,6 +3,7 @@ using JobPortal.Context;
 using JobPortal.DataAccess.Core.Contract;
 using JobPortal.DataAccess.Core.Model;
 using JobPortal.DataAccess.Helpers;
+using JobPortal.DataAccess.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -125,6 +126,21 @@ namespace JobPortal.DataAccess.Repository
                 string query = GetBaseJobPostQuery(selectStatement, searchInputModel, shouldSort: true, sqlParams: out sqlParams);
                 var result = jobPortalDbContext.Database.SqlQuery<RepositoryJobPostResult>(query, sqlParams).ToList();
                 return result;
+            }
+        }
+
+        public void SetBookmarkState(int jobPostId, bool isBookmarked)
+        {
+            using (var dbContext = new JobPortalDbContext())
+            {
+                var jobPost = new JobPost
+                {
+                    Id = jobPostId,
+                    IsBookmarked = isBookmarked
+                };
+                dbContext.JobPosts.Attach(jobPost);
+                dbContext.Entry<JobPost>(jobPost).Property(jp => jp.IsBookmarked).IsModified = true;
+                dbContext.SaveChanges();
             }
         }
     }

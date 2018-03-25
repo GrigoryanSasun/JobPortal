@@ -12,8 +12,23 @@ using System.Web.Http;
 
 namespace JobPortal.Web.Controllers
 {
+    [RoutePrefix("api/jobposts")]
     public class JobPostsController : ApiControllerBase
     {
+        private IHttpActionResult SetBookmarkStatus(int jobPostId, bool isBookmarked)
+        {
+            bool hasSucceeded = this._jobPostService.SetBookmarkState(jobPostId, isBookmarked: isBookmarked);
+            if (hasSucceeded)
+            {
+                return Ok();
+            }
+            else
+            {
+                return InternalServerError();
+            }
+        }
+
+        [Route("{*pathvalue}")]
         public IHttpActionResult GetJobPosts([FromUri] AppJobPostSearchInputModel searchInputModel)
         {
             var serviceInputModel = this._modelMapper.Map<AppJobPostSearchInputModel, ServiceJobPostSearchInputModel>(
@@ -26,6 +41,20 @@ namespace JobPortal.Web.Controllers
             }
             var appJobPostListResult = this._modelMapper.Map<ServiceJobPostListResult, AppJobPostListResult>(serviceJobPostListResult);
             return Ok(appJobPostListResult);
+        }
+        
+        [Route("{jobPostId:int}/bookmark")]
+        [HttpPut]
+        public IHttpActionResult CreateBookmark(int jobPostId)
+        {
+            return SetBookmarkStatus(jobPostId, isBookmarked: true);
+        }
+
+        [Route("{jobPostId:int}/bookmark")]
+        [HttpDelete]
+        public IHttpActionResult DeleteBookmark(int jobPostId)
+        {
+            return SetBookmarkStatus(jobPostId, isBookmarked: false);
         }
 
         public JobPostsController(

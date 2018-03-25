@@ -11,5 +11,6 @@ namespace JobPortal.Business.Core.Contract
     {
         ServiceJobPostFilterDataResult GetJobPostsAndFilterData(ServiceJobPostSearchInputModel searchInputModel);
         ServiceJobPostListResult GetJobPosts(ServiceJobPostSearchInputModel searchInputModel);
+        bool SetBookmarkState(int jobPostId, bool isBookmarked);
     }
 }

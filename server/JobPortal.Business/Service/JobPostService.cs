@@ -78,6 +78,20 @@ namespace JobPortal.Business.Service
             return result;
         }
 
+        public bool SetBookmarkState(int jobPostId, bool isBookmarked)
+        {
+            try
+            {
+                this._jobPostRepository.SetBookmarkState(jobPostId, isBookmarked);
+                return true;
+            }
+            catch (Exception exc)
+            {
+                // Normally, should log the error
+                return false;
+            }
+        }
+
         public JobPostService(
             IMapper modelMapper, 
             IJobPostRepository jobPostRepository,

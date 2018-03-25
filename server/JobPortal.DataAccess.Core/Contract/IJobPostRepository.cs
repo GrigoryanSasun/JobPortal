@@ -11,5 +11,6 @@ namespace JobPortal.DataAccess.Core.Contract
     {
         IEnumerable<RepositoryJobPostResult> GetJobPosts(RepositoryJobPostSearchInputModel searchInputModel);
         int GetJobPostCount(RepositoryJobPostSearchInputModel searchInputModel);
+        void SetBookmarkState(int jobPostId, bool isBookmarked);
     }
 }
