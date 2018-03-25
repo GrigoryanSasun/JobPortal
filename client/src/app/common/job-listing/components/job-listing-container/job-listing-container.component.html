@@ -20,6 +20,7 @@
     job-list-data="$ctrl.jobListData"
     on-sort-order-changed="$ctrl.changeSortOrder(newSortOrder)"
     on-page-changed="$ctrl.changePage(newPage)"
+    on-bookmark-requested="$ctrl.bookmark(jobPost, shouldRemoveBookmark)"
   >
   </job-list>
 </div>

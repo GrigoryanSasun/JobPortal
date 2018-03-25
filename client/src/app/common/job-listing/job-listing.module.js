@@ -1,5 +1,8 @@
 import angular from 'angular';
+
 import { JobPostService } from './services/job-post.service';
+import { JobPostBookmarkService } from './services/job-post-bookmark.service';
+
 import { JobListingContainerComponent } from './components/job-listing-container/job-listing-container.component';
 import { JobListComponent } from './components/job-list/job-list.component';
 import { SearchComponent } from './components/search/search.component';
@@ -20,6 +23,7 @@ const jobListingUrl = '/jobs';
 export const JobListingModule = angular
   .module('app.common.job-listing', [])
   .service('JobPostService', JobPostService)
+  .service('JobPostBookmarkService', JobPostBookmarkService)
   .component(jobListingContainerComponentName, JobListingContainerComponent)
   .component(jobListComponentName, JobListComponent)
   .component(searchComponentName, SearchComponent)

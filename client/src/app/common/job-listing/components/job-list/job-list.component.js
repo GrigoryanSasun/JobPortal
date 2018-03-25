@@ -29,6 +29,14 @@ class JobListController {
     }
   }
 
+  bookmarkJobPost(jobPost) {
+    const shouldRemoveBookmark = jobPost.IsBookmarked;
+    this.onBookmarkRequested({
+      jobPost,
+      shouldRemoveBookmark,
+    });
+  }
+
 
   notifySortOrderChange() {
     const newSortOrder = this.jobListData.currentSortOrder;
@@ -50,6 +58,7 @@ export const JobListComponent = {
   bindings: {
     jobListData: '<',
     onSortOrderChanged: '&',
-    onPageChanged: '&'
+    onPageChanged: '&',
+    onBookmarkRequested: '&'
   }
 };

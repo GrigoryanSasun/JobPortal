@@ -19,6 +19,17 @@ class JobListingContainerController {
     };
   }
 
+  bookmark(jobPost, shouldRemoveBookmark) {
+    this.JobPostService.bookmarkJobPost(jobPost, shouldRemoveBookmark)
+      .then((result) => {
+        if (result.success) {
+          //TODO: show toastr success notification
+        } else {
+          //TODO: show toastr failure notification
+        }
+      });
+  }
+
   changeQueryParams(newParams) {
     this.$state.go('.', newParams);
   }
@@ -198,15 +209,17 @@ class JobListingContainerController {
         if (result.success) {
           const {
             data: {
+              JobPosts,
               EmploymentTypes,
-            JobCategories,
-            Locations
+              JobCategories,
+              Locations
             }
           } = result;
           this.updateJobListData(result.data);
           this.employmentTypes = EmploymentTypes;
           this.jobCategories = JobCategories;
           this.locations = Locations;
+          this.jobPosts = JobPosts;
           this.updateAdvancedFilters();
         } else {
           this.hasErrorOccurred = true;
