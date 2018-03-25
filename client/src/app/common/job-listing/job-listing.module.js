@@ -5,6 +5,7 @@ import { JobListComponent } from './components/job-list/job-list.component';
 import { SearchComponent } from './components/search/search.component';
 import { CategoryFilterComponent } from './components/category-filter/category-filter.component';
 import { EmploymentTypeFilterComponent } from './components/employment-type-filter/employment-type-filter.component';
+import { LocationFilterComponent } from './components/location-filter/location-filter.component';
 
 
 const jobListingContainerComponentName = 'jobListingContainer';
@@ -12,6 +13,7 @@ const jobListComponentName = 'jobList';
 const searchComponentName = 'search';
 const categoryFilterComponentName = 'categoryFilter';
 const employmentTypeFilterComponentName = 'employmentTypeFilter';
+const locationFilterComponentName = 'locationFilter';
 
 const jobListingUrl = '/jobs';
 
@@ -23,34 +25,31 @@ export const JobListingModule = angular
   .component(searchComponentName, SearchComponent)
   .component(categoryFilterComponentName, CategoryFilterComponent)
   .component(employmentTypeFilterComponentName, EmploymentTypeFilterComponent)
+  .component(locationFilterComponentName, LocationFilterComponent)
   .config(($locationProvider, $stateProvider, $urlRouterProvider) => {
     'ngInject';
     $locationProvider.html5Mode(true);
+
+    const dynamicParamDefinition = {
+      dynamic: true
+    };
+
+    const dynamicArrayParamDefinition = {
+      ...dynamicParamDefinition,
+      array: true,
+    };
 
     $stateProvider
       .state('jobs', {
         url: `${jobListingUrl}?KeywordSearchType&Keyword&CategoryIds&EmploymentTypeIds&LocationIds&SortOrder&PageNumber`,
         params: {
-          SortOrder: {
-            dynamic: true
-          },
-          PageNumber: {
-            dynamic: true
-          },
-          KeywordSearchType: {
-            dynamic: true
-          },
-          Keyword: {
-            dynamic: true
-          },
-          CategoryIds: {
-            dynamic: true,
-            array: true,
-          },
-          EmploymentTypeIds: {
-            dynamic: true,
-            array: true,
-          }
+          SortOrder: dynamicParamDefinition,
+          PageNumber: dynamicParamDefinition,
+          KeywordSearchType: dynamicParamDefinition,
+          Keyword: dynamicParamDefinition,
+          CategoryIds: dynamicArrayParamDefinition,
+          EmploymentTypeIds: dynamicArrayParamDefinition,
+          LocationIds: dynamicArrayParamDefinition
         },
         component: jobListingContainerComponentName,
       });

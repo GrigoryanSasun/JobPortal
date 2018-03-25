@@ -1,4 +1,8 @@
 <div class="job-listing-container">
+  <location-filter
+    location-filter-data="$ctrl.locationFilterData"
+    on-filter-changed="$ctrl.changeLocationIds(selectedItemIds)">
+  </location-filter>
   <employment-type-filter
     employment-type-filter-data="$ctrl.employmentTypeFilterData"
     on-filter-changed="$ctrl.changeEmploymentTypeIds(selectedItemIds)"

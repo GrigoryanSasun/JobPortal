@@ -32,19 +32,29 @@ class JobListingContainerController {
   changeSearchOptions(newKeywordSearchType, newKeyword) {
     this.changeQueryParams({
       KeywordSearchType: newKeywordSearchType,
-      Keyword: newKeyword
+      Keyword: newKeyword,
+      PageNumber: 1,
     });
   }
 
   changeCategoryIds(selectedCategoryIds) {
     this.changeQueryParams({
-      CategoryIds: selectedCategoryIds
+      CategoryIds: selectedCategoryIds,
+      PageNumber: 1,
     });
   }
 
   changeEmploymentTypeIds(employmentTypeIds) {
     this.changeQueryParams({
-      EmploymentTypeIds: employmentTypeIds
+      EmploymentTypeIds: employmentTypeIds,
+      PageNumber: 1,
+    });
+  }
+
+  changeLocationIds(locationIds) {
+    this.changeQueryParams({
+      LocationIds: locationIds,
+      PageNumber: 1,
     });
   }
 
@@ -105,9 +115,14 @@ class JobListingContainerController {
     this.updateAdvancedFilterData('EmploymentTypeIds', 'employmentTypes', 'employmentTypeFilterData', 'employmentTypes');
   }
 
+  updateLocationFilterData() {
+    this.updateAdvancedFilterData('LocationIds', 'locations', 'locationFilterData', 'locations');
+  }
+
   updateAdvancedFilters() {
     this.updateCategoryFilterData();
     this.updateEmploymentTypeFilterData();
+    this.updateLocationFilterData();
   }
 
   loadJobPosts() {
