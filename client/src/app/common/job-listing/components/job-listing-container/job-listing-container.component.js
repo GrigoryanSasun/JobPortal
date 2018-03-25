@@ -12,6 +12,11 @@ class JobListingContainerController {
       ByCreatedDate: 0,
       ByViews: 1
     };
+    this.KEYWORD_SEARCH_TYPES = {
+      ByTitle: 0,
+      ByJobCategory: 1,
+      ByLocation: 2
+    };
   }
 
   changeQueryParams(newParams) {
@@ -21,6 +26,13 @@ class JobListingContainerController {
   changeSortOrder(newSortOrder) {
     this.changeQueryParams({
       SortOrder: newSortOrder
+    });
+  }
+
+  changeSearchOptions(newKeywordSearchType, newKeyword) {
+    this.changeQueryParams({
+      KeywordSearchType: newKeywordSearchType,
+      Keyword: newKeyword
     });
   }
 
@@ -44,6 +56,14 @@ class JobListingContainerController {
       totalCount: TotalCount,
       pageNumber: this.searchOptions.PageNumber,
       currentSortOrder: this.searchOptions.SortOrder,
+    };
+  }
+
+  updateSearchData() {
+    this.searchData = {
+      keywordSearchTypes: this.KEYWORD_SEARCH_TYPES,
+      currentKeywordSearchType: this.searchOptions.KeywordSearchType,
+      keyword: this.searchOptions.Keyword
     };
   }
 
@@ -72,6 +92,9 @@ class JobListingContainerController {
     if ((angular.isDefined(stateParams.KeywordSearchType)) && (angular.isDefined(stateParams.Keyword))) {
       searchOptions.KeywordSearchType = parseInt(stateParams.KeywordSearchType, 10);
       searchOptions.Keyword = stateParams.Keyword;
+    } else {
+      searchOptions.KeywordSearchType = this.KEYWORD_SEARCH_TYPES.ByTitle;
+      searchOptions.Keyword = '';
     }
     searchOptions.CategoryIds = this.parseIntegerArray(stateParams.CategoryIds);
     searchOptions.EmploymentTypeIds = this.parseIntegerArray(stateParams.EmploymentTypeIds);
@@ -98,6 +121,7 @@ class JobListingContainerController {
     this.$transitions.onSuccess({ to: 'jobs' }, (transition) => {
       // Happened as a result of url change, should reload the data
       this.searchOptions = this.getSearchOptionsFromParams(transition.params('to'));
+      this.updateSearchData();
       this.loadJobPosts();
     });
     this.isLoading = true;
@@ -109,6 +133,7 @@ class JobListingContainerController {
       sortOrderValues: SORT_ORDER,
       currentSortOrder: this.searchOptions.SortOrder
     };
+    this.updateSearchData();
     this.JobPostService.getFilterDataAndJobPosts(this.searchOptions)
       .then((result) => {
         if (result.success) {

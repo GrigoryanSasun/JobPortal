@@ -1,0 +1,8 @@
+<div>
+  <hr />
+  <select ng-model="$ctrl.searchData.currentKeywordSearchType" ng-options="keywordSearchType.value as keywordSearchType.label for keywordSearchType in $ctrl.keywordSearchTypes">
+      </select>
+  <input type="text" ng-model="$ctrl.searchData.keyword" />
+  <button type="button" ng-click="$ctrl.notifySearchOptionChange()">Search</button>
+  <hr />
+</div>
