@@ -15,8 +15,12 @@ namespace JobPortal.Business.Service
     public class JobPostService : IJobPostService
     {
         private readonly int _defaultItemsPerPage = 10;
+
         private IMapper _modelMapper;
         private IJobPostRepository _jobPostRepository;
+        private IJobCategoryRepository _jobCategoryRepository;
+        private IEmploymentTypeRepository _employmentTypeRepository;
+        private ILocationRepository _locationRepository;
 
         public ServiceJobPostListResult GetJobPosts(ServiceJobPostSearchInputModel searchInputModel)
         {
@@ -49,13 +53,44 @@ namespace JobPortal.Business.Service
             return result;
         }
 
+        public ServiceJobPostFilterDataResult GetJobPostsAndFilterData(ServiceJobPostSearchInputModel searchInputModel)
+        {
+            var jobPostsResult = this.GetJobPosts(searchInputModel);
+            var result = this._modelMapper.Map<ServiceJobPostListResult, ServiceJobPostFilterDataResult>(jobPostsResult);
+            if (result.HasFailed)
+            {
+                return result;
+            }
+            try
+            {
+                var repoCategoryResults = this._jobCategoryRepository.GetJobCategories();
+                var repoEmploymentTypeResults = this._employmentTypeRepository.GetEmploymentTypes();
+                var repoLocationResults = this._locationRepository.GetLocations();
+                result.JobCategories = this._modelMapper.Map<IEnumerable<RepositoryCategoryResult>, IEnumerable<ServiceCategoryResult>>(repoCategoryResults);
+                result.EmploymentTypes = this._modelMapper.Map<IEnumerable<RepositoryEmploymentTypeResult>, IEnumerable<ServiceEmploymentTypeResult>>(repoEmploymentTypeResults);
+                result.Locations = this._modelMapper.Map<IEnumerable<RepositoryLocationResult>, IEnumerable<ServiceLocationResult>>(repoLocationResults);
+            }
+            catch (Exception exc)
+            {
+                // Normally, should be logged
+                result.HasFailed = true;
+            }
+            return result;
+        }
+
         public JobPostService(
             IMapper modelMapper, 
-            IJobPostRepository jobPostRepository
+            IJobPostRepository jobPostRepository,
+            IJobCategoryRepository jobCategoryRepository,
+            IEmploymentTypeRepository employmentTypeRepository,
+            ILocationRepository locationRepository
         )
         {
             this._modelMapper = modelMapper;
             this._jobPostRepository = jobPostRepository;
+            this._jobCategoryRepository = jobCategoryRepository;
+            this._employmentTypeRepository = employmentTypeRepository;
+            this._locationRepository = locationRepository;
         }
     }
 }

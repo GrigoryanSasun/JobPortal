@@ -13,6 +13,7 @@ namespace JobPortal.Common.Model.Base
         public string Title { get; set; }
         public string Location { get; set; }
         public string EmploymentType { get; set; }
+        public bool IsBookmarked { get; set; }
         public int Views { get; set; }
         public DateTime CreatedAt { get; set; }
     }

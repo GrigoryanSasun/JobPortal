@@ -9,6 +9,7 @@ namespace JobPortal.Business.Core.Contract
 {
     public interface IJobPostService
     {
+        ServiceJobPostFilterDataResult GetJobPostsAndFilterData(ServiceJobPostSearchInputModel searchInputModel);
         ServiceJobPostListResult GetJobPosts(ServiceJobPostSearchInputModel searchInputModel);
     }
 }

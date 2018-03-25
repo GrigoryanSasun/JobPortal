@@ -40,9 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Base\CategoryResultBase.cs" />
+    <Compile Include="Model\Base\EmploymentTypeResultBase.cs" />
     <Compile Include="Model\Base\JobPostInputModelBase.cs" />
     <Compile Include="Model\Base\JobPostListResultBase.cs" />
     <Compile Include="Model\Base\JobPostResultBase.cs" />
+    <Compile Include="Model\Base\LocationResultBase.cs" />
     <Compile Include="Model\Base\PaginatedJobPostInputModelBase.cs" />
     <Compile Include="Model\KeywordSearchType.cs" />
     <Compile Include="Model\SortOrder.cs" />

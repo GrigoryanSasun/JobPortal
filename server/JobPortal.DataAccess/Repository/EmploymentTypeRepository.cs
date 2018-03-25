@@ -15,7 +15,7 @@ namespace JobPortal.DataAccess.Repository
         {
             using (var dbContext = new JobPortalDbContext())
             {
-                return dbContext.EmploymentTypes.Select((et) => new RepositoryEmploymentTypeResult
+                return dbContext.EmploymentTypes.OrderBy(et => et.Id).Select((et) => new RepositoryEmploymentTypeResult
                 {
                     Id = et.Id,
                     Name = et.Name

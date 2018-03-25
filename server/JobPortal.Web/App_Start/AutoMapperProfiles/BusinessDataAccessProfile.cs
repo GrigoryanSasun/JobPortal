@@ -14,6 +14,10 @@ namespace JobPortal.Web.App_Start.AutoMapperProfiles
         {
             CreateMap<ServiceJobPostSearchInputModel, RepositoryJobPostSearchInputModel>();
             CreateMap<RepositoryJobPostResult, ServiceJobPostResult>();
+            CreateMap<RepositoryCategoryResult, ServiceCategoryResult>();
+            CreateMap<RepositoryEmploymentTypeResult, ServiceEmploymentTypeResult>();
+            CreateMap<RepositoryLocationResult, ServiceLocationResult>();
+            CreateMap<ServiceJobPostListResult, ServiceJobPostFilterDataResult>();
         }
     }
 }

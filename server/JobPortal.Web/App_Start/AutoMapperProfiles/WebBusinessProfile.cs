@@ -10,7 +10,11 @@ namespace JobPortal.Web.App_Start.AutoMapperProfiles
         {
             CreateMap<AppJobPostSearchInputModel, ServiceJobPostSearchInputModel>();
             CreateMap<ServiceJobPostResult, AppJobPostResult>();
+            CreateMap<ServiceCategoryResult, AppJobCategoryResult>();
+            CreateMap<ServiceEmploymentTypeResult, AppEmploymentTypeResult>();
+            CreateMap<ServiceLocationResult, AppLocationResult>();
             CreateMap<ServiceJobPostListResult, AppJobPostListResult>();
+            CreateMap<ServiceJobPostFilterDataResult, AppJobPostFilterDataResult>();
         }
     }
 }

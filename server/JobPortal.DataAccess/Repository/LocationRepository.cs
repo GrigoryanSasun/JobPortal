@@ -15,7 +15,7 @@ namespace JobPortal.DataAccess.Repository
         {
             using (var dbContext = new JobPortalDbContext())
             {
-                return dbContext.Locations.Select((l) => new RepositoryLocationResult
+                return dbContext.Locations.OrderBy(l => l.Id).Select((l) => new RepositoryLocationResult
                 {
                     Id = l.Id,
                     Address = l.Address

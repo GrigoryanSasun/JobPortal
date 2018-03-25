@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JobPortal.DataAccess.Core.Model
+namespace JobPortal.Business.Core.Model
 {
-    public class RepositoryEmploymentTypeResult: EmploymentTypeResultBase
+    public class ServiceLocationResult: LocationResultBase
     {
     }
 }

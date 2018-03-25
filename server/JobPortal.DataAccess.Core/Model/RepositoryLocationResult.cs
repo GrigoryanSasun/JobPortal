@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JobPortal.Common.Model.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,7 @@ using System.Threading.Tasks;
 
 namespace JobPortal.DataAccess.Core.Model
 {
-    public class RepositoryLocationResult
+    public class RepositoryLocationResult: LocationResultBase
     {
-        public int Id { get; set; }
-        public string Address { get; set; }
     }
 }

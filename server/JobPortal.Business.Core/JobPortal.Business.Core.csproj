@@ -41,9 +41,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contract\IJobPostService.cs" />
+    <Compile Include="Model\ServiceCategoryResult.cs" />
+    <Compile Include="Model\ServiceEmploymentTypeResult.cs" />
+    <Compile Include="Model\ServiceJobPostFilterDataResult.cs" />
     <Compile Include="Model\ServiceJobPostListResult.cs" />
     <Compile Include="Model\ServiceJobPostResult.cs" />
     <Compile Include="Model\ServiceJobPostSearchInputModel.cs" />
+    <Compile Include="Model\ServiceLocationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,8 @@
-﻿using JobPortal.Web.Model;
+﻿using AutoMapper;
+using JobPortal.Business.Core.Contract;
+using JobPortal.Business.Core.Model;
+using JobPortal.Web.Controllers.Base;
+using JobPortal.Web.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +12,26 @@ using System.Web.Http;
 
 namespace JobPortal.Web.Controllers
 {
-    public class FilterDataController : ApiController
+    public class FilterDataController : ApiControllerBase
     {
-        public IHttpActionResult GetFilterData([FromUri]AppJobPostSearchInputModel inputModel)
+        public IHttpActionResult GetFilterData([FromUri]AppJobPostSearchInputModel searchInputModel)
         {
-
+            var serviceInputModel = this._modelMapper.Map<AppJobPostSearchInputModel, ServiceJobPostSearchInputModel>(
+                searchInputModel
+            );
+            var serviceJobPostFilterResult = this._jobPostService.GetJobPostsAndFilterData(serviceInputModel);
+            if (serviceJobPostFilterResult.HasFailed)
+            {
+                return InternalServerError();
+            }
+            var appFilterDataResult = this._modelMapper.Map<ServiceJobPostFilterDataResult, AppJobPostFilterDataResult>(serviceJobPostFilterResult);
+            return Ok(appFilterDataResult);
         }
+
+        public FilterDataController(
+            IMapper modelMapper,
+            IJobPostService jobPostService
+        ) : base(modelMapper, jobPostService)
+        { }
     }
 }
