@@ -54,6 +54,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@uirouter/angularjs": "1.0.15",
     "angular": "1.6.9"
   }
 }
