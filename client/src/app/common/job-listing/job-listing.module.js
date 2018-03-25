@@ -3,19 +3,23 @@ import { JobPostService } from './services/job-post.service';
 import { JobListingContainerComponent } from './components/job-listing-container/job-listing-container.component';
 import { JobListComponent } from './components/job-list/job-list.component';
 import { SearchComponent } from './components/search/search.component';
+import { CategoryFilterComponent } from './components/category-filter/category-filter.component';
 
 
-const JobListingContainerComponentName = 'jobListingContainer';
-const JobListComponentName = 'jobList';
-const SearchComponentName = 'search';
+const jobListingContainerComponentName = 'jobListingContainer';
+const jobListComponentName = 'jobList';
+const searchComponentName = 'search';
+const categoryFilterComponentName = 'categoryFilter';
+
 const jobListingUrl = '/jobs';
 
 export const JobListingModule = angular
   .module('app.common.job-listing', [])
   .service('JobPostService', JobPostService)
-  .component(JobListingContainerComponentName, JobListingContainerComponent)
-  .component(JobListComponentName, JobListComponent)
-  .component(SearchComponentName, SearchComponent)
+  .component(jobListingContainerComponentName, JobListingContainerComponent)
+  .component(jobListComponentName, JobListComponent)
+  .component(searchComponentName, SearchComponent)
+  .component(categoryFilterComponentName, CategoryFilterComponent)
   .config(($locationProvider, $stateProvider, $urlRouterProvider) => {
     'ngInject';
     $locationProvider.html5Mode(true);
@@ -35,9 +39,13 @@ export const JobListingModule = angular
           },
           Keyword: {
             dynamic: true
+          },
+          CategoryIds: {
+            dynamic: true,
+            array: true,
           }
         },
-        component: JobListingContainerComponentName,
+        component: jobListingContainerComponentName,
       });
     $urlRouterProvider.otherwise(jobListingUrl);
   })

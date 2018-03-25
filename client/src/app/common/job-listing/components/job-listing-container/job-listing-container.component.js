@@ -36,6 +36,12 @@ class JobListingContainerController {
     });
   }
 
+  changeCategoryIds(selectedCategoryIds) {
+    this.changeQueryParams({
+      CategoryIds: selectedCategoryIds
+    });
+  }
+
   changePage(newPage) {
     this.changeQueryParams({
       PageNumber: newPage
@@ -64,6 +70,24 @@ class JobListingContainerController {
       keywordSearchTypes: this.KEYWORD_SEARCH_TYPES,
       currentKeywordSearchType: this.searchOptions.KeywordSearchType,
       keyword: this.searchOptions.Keyword
+    };
+  }
+
+  updateCategoryFilterData() {
+    const categoryIdMap = {};
+    const categoryIds = this.searchOptions.CategoryIds;
+    for (let i = 0; i < categoryIds.length; i++) {
+      const categoryId = categoryIds[i];
+      categoryIdMap[categoryId] = true;
+    }
+    if (this.jobCategories) {
+      for (let i = 0; i < this.jobCategories.length; i++) {
+        const category = this.jobCategories[i];
+        category.isSelected = !!categoryIdMap[category.Id];
+      }
+    }
+    this.categoryFilterData = {
+      categories: this.jobCategories,
     };
   }
 
@@ -122,6 +146,7 @@ class JobListingContainerController {
       // Happened as a result of url change, should reload the data
       this.searchOptions = this.getSearchOptionsFromParams(transition.params('to'));
       this.updateSearchData();
+      this.updateCategoryFilterData();
       this.loadJobPosts();
     });
     this.isLoading = true;
@@ -140,14 +165,15 @@ class JobListingContainerController {
           const {
             data: {
               EmploymentTypes,
-              JobCategories,
-              Locations
+            JobCategories,
+            Locations
             }
           } = result;
           this.updateJobListData(result.data);
           this.employmentTypes = EmploymentTypes;
           this.jobCategories = JobCategories;
           this.locations = Locations;
+          this.updateCategoryFilterData();
         } else {
           this.hasErrorOccurred = true;
         }
