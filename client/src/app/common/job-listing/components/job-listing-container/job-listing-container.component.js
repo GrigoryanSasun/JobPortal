@@ -2,32 +2,49 @@ import angular from 'angular';
 import templateUrl from './job-listing-container.component.html';
 
 class JobListingContainerController {
-  constructor($stateParams, $state, JobPostService) {
+  constructor($stateParams, $state, $transitions, JobPostService) {
     'ngInject';
+    this.$transitions = $transitions;
     this.$stateParams = $stateParams;
     this.$state = $state;
     this.JobPostService = JobPostService;
-    this.defaultItemsPerPage = 10;
     this.SORT_ORDER = {
       ByCreatedDate: 0,
       ByViews: 1
     };
   }
 
+  changeQueryParams(newParams) {
+    this.$state.go('.', newParams);
+  }
+
   changeSortOrder(newSortOrder) {
-    this.$state.go('.', {
+    this.changeQueryParams({
       SortOrder: newSortOrder
     });
-    this.searchOptions.SortOrder = newSortOrder;
-    this.loadJobPosts();
   }
 
   changePage(newPage) {
-    this.$state.go('.', {
+    this.changeQueryParams({
       PageNumber: newPage
     });
-    this.searchOptions.PageNumber = newPage;
-    this.loadJobPosts();
+  }
+
+  updateJobListData(newData) {
+    const {
+      JobPosts,
+      PageCount,
+      TotalCount
+    } = newData;
+    this.jobListData = {
+      ...this.jobListData,
+      isLoading: false,
+      jobPosts: JobPosts,
+      pageCount: PageCount,
+      totalCount: TotalCount,
+      pageNumber: this.searchOptions.PageNumber,
+      currentSortOrder: this.searchOptions.SortOrder,
+    };
   }
 
   loadJobPosts() {
@@ -35,18 +52,7 @@ class JobListingContainerController {
     this.JobPostService.getJobPosts(this.searchOptions)
       .then((result) => {
         if (result.success) {
-          const {
-            JobPosts,
-            PageCount,
-            TotalCount
-          } = result.data;
-          this.jobListData = {
-            ...this.jobListData,
-            jobPosts: JobPosts,
-            pageCount: PageCount,
-            totalCount: TotalCount,
-            pageNumber: this.searchOptions.PageNumber,
-          };
+          this.updateJobListData(result.data);
         }
         this.jobListData.isLoading = false;
       });
@@ -61,27 +67,27 @@ class JobListingContainerController {
     return [];
   }
 
-  getSearchOptionsFromUrl() {
+  getSearchOptionsFromParams(stateParams) {
     const searchOptions = {};
-    if ((angular.isDefined(this.$stateParams.KeywordSearchType)) && (angular.isDefined(this.$stateParams.Keyword))) {
-      searchOptions.KeywordSearchType = parseInt(this.$stateParams.KeywordSearchType, 10);
-      searchOptions.Keyword = this.$stateParams.Keyword;
+    if ((angular.isDefined(stateParams.KeywordSearchType)) && (angular.isDefined(stateParams.Keyword))) {
+      searchOptions.KeywordSearchType = parseInt(stateParams.KeywordSearchType, 10);
+      searchOptions.Keyword = stateParams.Keyword;
     }
-    searchOptions.CategoryIds = this.parseIntegerArray(this.$stateParams.CategoryIds);
-    searchOptions.EmploymentTypeIds = this.parseIntegerArray(this.$stateParams.EmploymentTypeIds);
-    searchOptions.LocationIds = this.parseIntegerArray(this.$stateParams.LocationIds);
-    searchOptions.SortOrder = this.getSortOrder();
-    if (angular.isDefined(this.$stateParams.PageNumber)) {
-      searchOptions.PageNumber = parseInt(this.$stateParams.PageNumber);
+    searchOptions.CategoryIds = this.parseIntegerArray(stateParams.CategoryIds);
+    searchOptions.EmploymentTypeIds = this.parseIntegerArray(stateParams.EmploymentTypeIds);
+    searchOptions.LocationIds = this.parseIntegerArray(stateParams.LocationIds);
+    searchOptions.SortOrder = this.getSortOrder(stateParams);
+    if (angular.isDefined(stateParams.PageNumber)) {
+      searchOptions.PageNumber = parseInt(stateParams.PageNumber);
     } else {
       searchOptions.PageNumber = 1;
     }
     return searchOptions;
   }
 
-  getSortOrder() {
-    const sortOrder = this.$stateParams.SortOrder;
-    if (sortOrder != null) {
+  getSortOrder(stateParams) {
+    const sortOrder = stateParams.SortOrder;
+    if (angular.isDefined(sortOrder)) {
       return parseInt(sortOrder, 10);
     } else {
       return this.SORT_ORDER.ByCreatedDate;
@@ -89,9 +95,14 @@ class JobListingContainerController {
   }
 
   $onInit() {
+    this.$transitions.onSuccess({ to: 'jobs' }, (transition) => {
+      // Happened as a result of url change, should reload the data
+      this.searchOptions = this.getSearchOptionsFromParams(transition.params('to'));
+      this.loadJobPosts();
+    });
     this.isLoading = true;
     this.hasErrorOccurred = false;
-    this.searchOptions = this.getSearchOptionsFromUrl();
+    this.searchOptions = this.getSearchOptionsFromParams(this.$stateParams);
     const SORT_ORDER = this.SORT_ORDER;
     this.jobListData = {
       isLoading: true,
@@ -102,23 +113,13 @@ class JobListingContainerController {
       .then((result) => {
         if (result.success) {
           const {
-            data : {
-              JobPosts,
-              PageCount,
-              TotalCount,
+            data: {
               EmploymentTypes,
               JobCategories,
               Locations
             }
           } = result;
-          this.jobListData = {
-            ...this.jobListData,
-            isLoading: false,
-            jobPosts: JobPosts,
-            pageCount: PageCount,
-            totalCount: TotalCount,
-            pageNumber: this.searchOptions.PageNumber,
-          };
+          this.updateJobListData(result.data);
           this.employmentTypes = EmploymentTypes;
           this.jobCategories = JobCategories;
           this.locations = Locations;

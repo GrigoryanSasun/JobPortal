@@ -1,10 +1,6 @@
 import templateUrl from './job-list.component.html';
 
 class JobListController {
-  constructor() {
-    'ngInject';
-  }
-
   $onInit() {
     const {
       ByCreatedDate,
@@ -36,7 +32,7 @@ class JobListController {
 
   notifySortOrderChange() {
     const newSortOrder = this.jobListData.currentSortOrder;
-    this.onSortOrderChange({
+    this.onSortOrderChanged({
       newSortOrder,
     });
   }
@@ -53,7 +49,7 @@ export const JobListComponent = {
   controller: JobListController,
   bindings: {
     jobListData: '<',
-    onSortOrderChange: '&',
+    onSortOrderChanged: '&',
     onPageChanged: '&'
   }
 };
