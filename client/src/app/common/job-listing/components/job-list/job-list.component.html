@@ -1,0 +1,30 @@
+<div class="job-list">
+  <div ng-show="$ctrl.jobListData.isLoading">Loading...</div>
+  <div class="content" ng-hide="$ctrl.jobListData.isLoading">
+    <div class="stats">
+      {{$ctrl.jobListData.totalCount}} offers
+    </div>
+    <div class="sort-order">
+      <select
+        ng-model="$ctrl.jobListData.currentSortOrder" ng-options="sortOption.value as sortOption.label for sortOption in $ctrl.sortOrderOptions"
+        ng-change="$ctrl.notifySortOrderChange()"
+      >
+      </select>
+    </div>
+    <div class="job-posts">
+      <div class="job-post" ng-repeat="jobPost in $ctrl.jobListData.jobPosts">
+        <img ng-src="{{jobPost.JobPostThumbnailUrl}}" ng-style="{width: '100px', height: '100px'}" />
+        <div>{{jobPost.Title}}</div>
+        <div>{{jobPost.Location}}</div>
+        <div>{{jobPost.EmploymentType}}</div>
+        <div>{{jobPost.Views}}</div>
+        <div>{{jobPost.CreatedAt}}</div>
+        <hr />
+      </div>
+    </div>
+    <div class="pages">
+      <button type="button" ng-repeat="page in $ctrl.pages" ng-click="$ctrl.notifyChangePage(page)">{{page}}</button>
+    </div>
+  </div>
+
+</div>

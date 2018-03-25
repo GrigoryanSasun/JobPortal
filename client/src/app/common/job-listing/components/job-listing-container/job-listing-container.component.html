@@ -1,1 +1,9 @@
-I am the job listing container component
+<div class="job-listing-container">
+  <div>I am not gone</div>
+  <job-list
+    job-list-data="$ctrl.jobListData"
+    on-sort-order-change="$ctrl.changeSortOrder(newSortOrder)"
+    on-page-changed="$ctrl.changePage(newPage)"
+  >
+</job-list>
+</div>
