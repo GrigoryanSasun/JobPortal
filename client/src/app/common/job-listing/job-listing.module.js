@@ -4,12 +4,14 @@ import { JobListingContainerComponent } from './components/job-listing-container
 import { JobListComponent } from './components/job-list/job-list.component';
 import { SearchComponent } from './components/search/search.component';
 import { CategoryFilterComponent } from './components/category-filter/category-filter.component';
+import { EmploymentTypeFilterComponent } from './components/employment-type-filter/employment-type-filter.component';
 
 
 const jobListingContainerComponentName = 'jobListingContainer';
 const jobListComponentName = 'jobList';
 const searchComponentName = 'search';
 const categoryFilterComponentName = 'categoryFilter';
+const employmentTypeFilterComponentName = 'employmentTypeFilter';
 
 const jobListingUrl = '/jobs';
 
@@ -20,6 +22,7 @@ export const JobListingModule = angular
   .component(jobListComponentName, JobListComponent)
   .component(searchComponentName, SearchComponent)
   .component(categoryFilterComponentName, CategoryFilterComponent)
+  .component(employmentTypeFilterComponentName, EmploymentTypeFilterComponent)
   .config(($locationProvider, $stateProvider, $urlRouterProvider) => {
     'ngInject';
     $locationProvider.html5Mode(true);
@@ -41,6 +44,10 @@ export const JobListingModule = angular
             dynamic: true
           },
           CategoryIds: {
+            dynamic: true,
+            array: true,
+          },
+          EmploymentTypeIds: {
             dynamic: true,
             array: true,
           }

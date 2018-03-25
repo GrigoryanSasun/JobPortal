@@ -1,7 +1,12 @@
 <div class="job-listing-container">
+  <employment-type-filter
+    employment-type-filter-data="$ctrl.employmentTypeFilterData"
+    on-filter-changed="$ctrl.changeEmploymentTypeIds(selectedItemIds)"
+  >
+  </employment-type-filter>
   <category-filter
     category-filter-data="$ctrl.categoryFilterData"
-    on-category-filter-changed="$ctrl.changeCategoryIds(selectedCategoryIds)">
+    on-filter-changed="$ctrl.changeCategoryIds(selectedItemIds)">
   </category-filter>
   <search
     search-data="$ctrl.searchData"

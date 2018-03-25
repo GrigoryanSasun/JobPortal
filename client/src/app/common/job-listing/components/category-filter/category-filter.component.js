@@ -1,26 +1,24 @@
-import templateUrl from './category-filter.component.html';
+import advancedFilterViewBase from '../shared/advanced-filter-view-base.html';
+import { AdvancedFilterControllerBase } from '../shared/advanced-filter-controller-base.controller';
 
-class CategoryFilterController {
-  notifyCategoryFilterChange() {
-    const categories = this.categoryFilterData.categories;
-    const selectedCategoryIds = [];
-    for (let i = 0; i < categories.length; i++) {
-      const category = categories[i];
-      if (category.isSelected) {
-        selectedCategoryIds.push(category.Id);
-      }
+class CategoryFilterController extends AdvancedFilterControllerBase {
+  getItems() {
+    if (angular.isDefined(this.categoryFilterData) && angular.isDefined(this.categoryFilterData.categories)) {
+      return this.categoryFilterData.categories;
     }
-    this.onCategoryFilterChanged({
-      selectedCategoryIds,
-    });
+    return [];
+  }
+
+  getLabelPropertyName() {
+    return "Name";
   }
 }
 
 export const CategoryFilterComponent = {
-  templateUrl,
+  templateUrl: advancedFilterViewBase,
   controller: CategoryFilterController,
   bindings: {
     categoryFilterData: '<',
-    onCategoryFilterChanged: '&'
+    onFilterChanged: '&'
   }
 };

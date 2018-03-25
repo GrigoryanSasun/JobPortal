@@ -1,0 +1,8 @@
+<div>
+  <hr />
+  <div ng-repeat="item in $ctrl.getItems()">
+    <label>{{item[$ctrl.getLabelPropertyName()]}}</label>
+    <input type="checkbox" ng-model="item.isSelected" ng-change="$ctrl.notifyFilterChange()" />
+  </div>
+  <hr />
+</div>

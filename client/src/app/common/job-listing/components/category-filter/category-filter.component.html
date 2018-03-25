@@ -1,8 +1,0 @@
-<div class="category-filter">
-  <hr />
-  <div ng-repeat="category in $ctrl.categoryFilterData.categories">
-    <label>{{category.Name}}</label>
-    <input type="checkbox" ng-model="category.isSelected" ng-change="$ctrl.notifyCategoryFilterChange()" />
-  </div>
-  <hr />
-</div>

@@ -42,6 +42,12 @@ class JobListingContainerController {
     });
   }
 
+  changeEmploymentTypeIds(employmentTypeIds) {
+    this.changeQueryParams({
+      EmploymentTypeIds: employmentTypeIds
+    });
+  }
+
   changePage(newPage) {
     this.changeQueryParams({
       PageNumber: newPage
@@ -73,22 +79,35 @@ class JobListingContainerController {
     };
   }
 
-  updateCategoryFilterData() {
-    const categoryIdMap = {};
-    const categoryIds = this.searchOptions.CategoryIds;
-    for (let i = 0; i < categoryIds.length; i++) {
-      const categoryId = categoryIds[i];
-      categoryIdMap[categoryId] = true;
+  updateAdvancedFilterData(searchParamPath, actualDataPath, advancedFilterDataPath, advancedFilterItemsPath) {
+    const itemIdMap = {};
+    const itemIds = this.searchOptions[searchParamPath];
+    for (let i = 0; i < itemIds.length; i++) {
+      const itemId = itemIds[i];
+      itemIdMap[itemId] = true;
     }
-    if (this.jobCategories) {
-      for (let i = 0; i < this.jobCategories.length; i++) {
-        const category = this.jobCategories[i];
-        category.isSelected = !!categoryIdMap[category.Id];
+    if (this[actualDataPath]) {
+      for (let i = 0; i < this[actualDataPath].length; i++) {
+        const item = this[actualDataPath][i];
+        item.isSelected = !!itemIdMap[item.Id];
       }
     }
-    this.categoryFilterData = {
-      categories: this.jobCategories,
+    this[advancedFilterDataPath] = {
+      [advancedFilterItemsPath]: this[actualDataPath]
     };
+  }
+
+  updateCategoryFilterData() {
+    this.updateAdvancedFilterData('CategoryIds', 'jobCategories', 'categoryFilterData', 'categories');
+  }
+
+  updateEmploymentTypeFilterData() {
+    this.updateAdvancedFilterData('EmploymentTypeIds', 'employmentTypes', 'employmentTypeFilterData', 'employmentTypes');
+  }
+
+  updateAdvancedFilters() {
+    this.updateCategoryFilterData();
+    this.updateEmploymentTypeFilterData();
   }
 
   loadJobPosts() {
@@ -146,7 +165,7 @@ class JobListingContainerController {
       // Happened as a result of url change, should reload the data
       this.searchOptions = this.getSearchOptionsFromParams(transition.params('to'));
       this.updateSearchData();
-      this.updateCategoryFilterData();
+      this.updateAdvancedFilters();
       this.loadJobPosts();
     });
     this.isLoading = true;
@@ -173,7 +192,7 @@ class JobListingContainerController {
           this.employmentTypes = EmploymentTypes;
           this.jobCategories = JobCategories;
           this.locations = Locations;
-          this.updateCategoryFilterData();
+          this.updateAdvancedFilters();
         } else {
           this.hasErrorOccurred = true;
         }
