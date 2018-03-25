@@ -88,7 +88,10 @@
     <Compile Include="Model\JobTitle.cs" />
     <Compile Include="Model\Location.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\EmploymentTypeRepository.cs" />
+    <Compile Include="Repository\JobCategoryRepository.cs" />
     <Compile Include="Repository\JobPostRepository.cs" />
+    <Compile Include="Repository\LocationRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JobPortal.Common\JobPortal.Common.csproj">
@@ -127,5 +130,6 @@
       <DependentUpon>201803242124397_AddJobPostThumbnailUrlToJobPostsTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

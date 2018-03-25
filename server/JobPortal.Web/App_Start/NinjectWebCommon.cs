@@ -85,6 +85,9 @@ namespace JobPortal.Web.App_Start
         private static void RegisterDataAccessServices(IKernel kernel)
         {
             kernel.Bind<IJobPostRepository>().To<JobPostRepository>().InSingletonScope();
+            kernel.Bind<IJobCategoryRepository>().To<JobCategoryRepository>().InSingletonScope();
+            kernel.Bind<IEmploymentTypeRepository>().To<EmploymentTypeRepository>().InSingletonScope();
+            kernel.Bind<ILocationRepository>().To<LocationRepository>().InSingletonScope();
         }
 
         /// <summary>

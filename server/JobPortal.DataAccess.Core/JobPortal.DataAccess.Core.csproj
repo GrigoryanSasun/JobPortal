@@ -40,9 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contract\IEmploymentTypeRepository.cs" />
+    <Compile Include="Contract\IJobCategoryRepository.cs" />
     <Compile Include="Contract\IJobPostRepository.cs" />
+    <Compile Include="Contract\ILocationRepository.cs" />
+    <Compile Include="Model\RepositoryCategoryResult.cs" />
+    <Compile Include="Model\RepositoryEmploymentTypeResult.cs" />
     <Compile Include="Model\RepositoryJobPostResult.cs" />
     <Compile Include="Model\RepositoryJobPostSearchInputModel.cs" />
+    <Compile Include="Model\RepositoryLocationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

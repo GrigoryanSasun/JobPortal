@@ -134,6 +134,7 @@
     <Compile Include="App_Start\AutoMapperProfiles\BusinessDataAccessProfile.cs" />
     <Compile Include="App_Start\AutoMapperProfiles\WebBusinessProfile.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
+    <Compile Include="Controllers\FilterDataController.cs" />
     <Compile Include="Controllers\JobPostsController.cs" />
     <Compile Include="ViewModel\AngularSpaResponseViewModel.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
