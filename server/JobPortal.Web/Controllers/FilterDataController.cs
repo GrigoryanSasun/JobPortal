@@ -12,7 +12,7 @@ using System.Web.Http;
 
 namespace JobPortal.Web.Controllers
 {
-    [RoutePrefix("api/filterdata")]
+    [RoutePrefix("filterdata")]
     public class FilterDataController : ApiControllerBase
     {
         [Route("{*pathvalue}")]

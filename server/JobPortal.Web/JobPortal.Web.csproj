@@ -133,6 +133,7 @@
   <ItemGroup>
     <Compile Include="App_Start\AutoMapperProfiles\BusinessDataAccessProfile.cs" />
     <Compile Include="App_Start\AutoMapperProfiles\WebBusinessProfile.cs" />
+    <Compile Include="App_Start\CommonPrefixProvider.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="Controllers\Base\ApiControllerBase.cs" />
     <Compile Include="Controllers\FilterDataController.cs" />

@@ -12,7 +12,7 @@ using System.Web.Http;
 
 namespace JobPortal.Web.Controllers
 {
-    [RoutePrefix("api/jobposts")]
+    [RoutePrefix("jobposts")]
     public class JobPostsController : ApiControllerBase
     {
         private IHttpActionResult SetBookmarkStatus(int jobPostId, bool isBookmarked)
