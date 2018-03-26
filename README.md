@@ -30,10 +30,10 @@ The `client` folder contains the AngularJS code and the webpack setup. Do the fo
 The client side code is written using javascript ES6 and SCSS which should be compiled to javascript ES5 and CSS. In development mode, the webpack dev server does hot module replacement (https://webpack.js.org/concepts/hot-module-replacement/) which allows to change the styles and see the results without refreshing the app (in development mode change one of the scss files and observe how the changes are reflected without refreshing the app). Also, when the app is built for production, the javascript and css files are minified and content hashes are added to their names. In addition to that, angularjs component templates are cached for production.
 
 ### Code structure
-## Client-side code
+#### Client-side code
 The client side code is in the `client` folder. The `config` folder contains the webpack configuration for both development and production. The `src` folder contains the application code written according to this styleguide (https://github.com/toddmotto/angularjs-styleguide). It is important to note that all vendor libraries are imported in the `src/app/vendor.js` file and all polyfills are imported in the `src/app/polyfills.js` file.
 
-## Server-side code
+#### Server-side code
 The server-side code is in the `server` folder. The solution is organized using N-tier architecture.
 We have the following layers:
 
