@@ -1,4 +1,5 @@
 import templateUrl from './search.component.html';
+import './search.component.scss';
 
 class SearchController {
   $onInit() {
@@ -7,20 +8,38 @@ class SearchController {
       ByJobCategory,
       ByLocation,
     } = this.searchData.keywordSearchTypes;
+    const jobTitleType = {
+      label: 'Job title',
+      value: ByTitle
+    };
+    const jobCategoryType = {
+      label: 'Job category',
+      value: ByJobCategory
+    };
+    const locationType = {
+      label: 'Location',
+      value: ByLocation
+    };
     this.keywordSearchTypes = [
-      {
-        label: 'Job title',
-        value: ByTitle
-      },
-      {
-        label: 'Job category',
-        value: ByJobCategory
-      },
-      {
-        label: 'Location',
-        value: ByLocation
-      }
+      jobTitleType,
+      jobCategoryType,
+      locationType
     ];
+
+    this.keywordSearchTypeMap = {
+      [ByTitle]: jobTitleType,
+      [ByJobCategory]: jobCategoryType,
+      [ByLocation]: locationType
+    }
+  }
+
+  changeKeywordSearchType(newKeywordSearchType) {
+    this.searchData.currentKeywordSearchType = newKeywordSearchType;
+  }
+
+  getCurrentKeywordSearchTypeLabel() {
+    const type =  this.keywordSearchTypeMap[this.searchData.currentKeywordSearchType];
+    return type.label;
   }
 
   notifySearchOptionChange() {

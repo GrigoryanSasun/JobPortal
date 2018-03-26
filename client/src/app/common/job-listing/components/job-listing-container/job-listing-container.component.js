@@ -1,6 +1,8 @@
 import angular from 'angular';
 import templateUrl from './job-listing-container.component.html';
 
+import './job-listing-container.component.scss';
+
 class JobListingContainerController {
   constructor($stateParams, $state, $transitions, JobPostService) {
     'ngInject';

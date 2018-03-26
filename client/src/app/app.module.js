@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 export const AppModule = angular
   .module('app', [
     'ui.router',
+    'ui.bootstrap',
     CommonModule
   ])
   .component('app', AppComponent)

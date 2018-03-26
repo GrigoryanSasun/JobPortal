@@ -1,26 +1,26 @@
-<div class="job-listing-container">
-  <location-filter
-    location-filter-data="$ctrl.locationFilterData"
-    on-filter-changed="$ctrl.changeLocationIds(selectedItemIds)">
-  </location-filter>
-  <employment-type-filter
-    employment-type-filter-data="$ctrl.employmentTypeFilterData"
-    on-filter-changed="$ctrl.changeEmploymentTypeIds(selectedItemIds)"
-  >
-  </employment-type-filter>
-  <category-filter
-    category-filter-data="$ctrl.categoryFilterData"
-    on-filter-changed="$ctrl.changeCategoryIds(selectedItemIds)">
-  </category-filter>
-  <search
-    search-data="$ctrl.searchData"
-    on-search-options-changed="$ctrl.changeSearchOptions(newKeywordSearchType, newKeyword)">
-  </search>
-  <job-list
-    job-list-data="$ctrl.jobListData"
-    on-sort-order-changed="$ctrl.changeSortOrder(newSortOrder)"
-    on-page-changed="$ctrl.changePage(newPage)"
-    on-bookmark-requested="$ctrl.bookmark(jobPost, shouldRemoveBookmark)"
-  >
-  </job-list>
+<div class="row job-listing-container">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <search search-data="$ctrl.searchData" on-search-options-changed="$ctrl.changeSearchOptions(newKeywordSearchType, newKeyword)">
+      </search>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+      <category-filter
+        category-filter-data="$ctrl.categoryFilterData" on-filter-changed="$ctrl.changeCategoryIds(selectedItemIds)">
+      </category-filter>
+      <employment-type-filter               employment-type-filter-data="$ctrl.employmentTypeFilterData"     on-filter-changed="$ctrl.changeEmploymentTypeIds(selectedItemIds)">
+      </employment-type-filter>
+      <location-filter
+        location-filter-data="$ctrl.locationFilterData" on-filter-changed="$ctrl.changeLocationIds(selectedItemIds)">
+      </location-filter>
+    </div>
+    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+      <job-list
+        job-list-data="$ctrl.jobListData" on-sort-order-changed="$ctrl.changeSortOrder(newSortOrder)" on-page-changed="$ctrl.changePage(newPage)"
+        on-bookmark-requested="$ctrl.bookmark(jobPost, shouldRemoveBookmark)">
+      </job-list>
+    </div>
+  </div>
 </div>

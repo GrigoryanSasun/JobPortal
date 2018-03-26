@@ -1,8 +1,18 @@
-<div>
-  <hr />
-  <select ng-model="$ctrl.searchData.currentKeywordSearchType" ng-options="keywordSearchType.value as keywordSearchType.label for keywordSearchType in $ctrl.keywordSearchTypes">
-      </select>
-  <input type="text" ng-model="$ctrl.searchData.keyword" />
-  <button type="button" ng-click="$ctrl.notifySearchOptionChange()">Search</button>
-  <hr />
-</div>
+<form class="keyword-search-form" ng-submit="$ctrl.notifySearchOptionChange()">
+  <div class="input-group">
+    <span class="input-group-btn">
+      <div class="btn-group" uib-dropdown>
+      <button type="button" class="btn btn-default" uib-dropdown-toggle>
+        {{$ctrl.getCurrentKeywordSearchTypeLabel()}} <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+        <li role="menuitem" ng-repeat="keywordSearchType in $ctrl.keywordSearchTypes"><a href="javascript:void(0)" ng-click="$ctrl.changeKeywordSearchType(keywordSearchType.value)">{{keywordSearchType.label}}</a></li>
+      </ul>
+    </div>
+    </span>
+    <input type="text" class="form-control" ng-model="$ctrl.searchData.keyword" />
+    <span class="input-group-btn">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </span>
+  </div>
+</form>
