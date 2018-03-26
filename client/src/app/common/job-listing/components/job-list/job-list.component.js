@@ -1,4 +1,5 @@
 import templateUrl from './job-list.component.html';
+import './job-list.component.scss';
 
 class JobListController {
   $onInit() {

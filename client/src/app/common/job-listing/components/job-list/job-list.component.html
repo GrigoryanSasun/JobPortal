@@ -1,33 +1,42 @@
 <div class="job-list">
   <div ng-show="$ctrl.jobListData.isLoading">Loading...</div>
-  <div class="content" ng-hide="$ctrl.jobListData.isLoading">
-    <div class="stats">
-      {{$ctrl.jobListData.totalCount}} offers
-    </div>
-    <div class="sort-order">
-      <select
-        ng-model="$ctrl.jobListData.currentSortOrder" ng-options="sortOption.value as sortOption.label for sortOption in $ctrl.sortOrderOptions"
-        ng-change="$ctrl.notifySortOrderChange()"
-      >
-      </select>
-    </div>
-    <div class="job-posts">
-      <div class="job-post" ng-repeat="jobPost in $ctrl.jobListData.jobPosts">
-        <img ng-src="{{jobPost.JobPostThumbnailUrl}}" ng-style="{width: '100px', height: '100px'}" />
-        <div>{{jobPost.Title}}</div>
-        <div>{{jobPost.Location}}</div>
-        <div>{{jobPost.EmploymentType}}</div>
-        <div>{{jobPost.Views}}</div>
-        <div>{{jobPost.CreatedAt}}</div>
-        <button type="button" ng-disabled="jobPost.isBeingBookmarked" ng-click="$ctrl.bookmarkJobPost(jobPost)">
-          <span ng-show="jobPost.IsBookmarked">Remove Bookmark</span>
-          <span ng-hide="jobPost.IsBookmarked">Bookmark</span>
-        </button>
-        <hr />
+  <div class="row" ng-hide="$ctrl.jobListData.isLoading">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-10">
+          <h3>{{$ctrl.jobListData.totalCount}} offers found</h3>
+        </div>
+        <div class="col-md-2">
+          <select ng-model="$ctrl.jobListData.currentSortOrder" ng-options="sortOption.value as sortOption.label for sortOption in $ctrl.sortOrderOptions"
+            ng-change="$ctrl.notifySortOrderChange()">
+            </select>
+        </div>
       </div>
-    </div>
-    <div class="pages">
-      <button type="button" ng-repeat="page in $ctrl.pages" ng-click="$ctrl.notifyChangePage(page)">{{page}}</button>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="job-post row" ng-repeat="jobPost in $ctrl.jobListData.jobPosts">
+            <div class="col-md-3">
+              <img ng-src="{{jobPost.JobPostThumbnailUrl}}" ng-style="{width: '100px', height: '100px'}" />
+            </div>
+            <div class="col-md-6">
+              <div>{{jobPost.Title}}</div>
+              <div>{{jobPost.Location}}</div>
+              <div>{{jobPost.EmploymentType}}</div>
+              <div>{{jobPost.Views}}</div>
+              <div>{{jobPost.CreatedAt}}</div>
+            </div>
+            <div class="col-md-3">
+              <button type="button" ng-disabled="jobPost.isBeingBookmarked" ng-click="$ctrl.bookmarkJobPost(jobPost)">
+                <span ng-show="jobPost.IsBookmarked">Remove Bookmark</span>
+                <span ng-hide="jobPost.IsBookmarked">Bookmark</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pages">
+        <button type="button" ng-repeat="page in $ctrl.pages" ng-click="$ctrl.notifyChangePage(page)">{{page}}</button>
+      </div>
     </div>
   </div>
 
