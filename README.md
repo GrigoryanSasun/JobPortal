@@ -23,7 +23,7 @@ The `client` folder contains the AngularJS code and the webpack setup. Do the fo
 
 ### To run the application in production mode
 * In the client folder run `npm run build:prod` which will create the minified version of the assets and copy them to the JobPortal.Web/Content/dist folder.
-* Start the web api server WITHOUT debugging (you can set debug="true" in the Web.config of the JobPortal.Web project).
+* Start the web api server WITHOUT debugging (you can set debug="false" in the Web.config of the JobPortal.Web project).
 * Visit http://localhost:BACKEND_SERVER_PORT to start the app in production mode.
 
 ### Why was webpack used?
