@@ -21,6 +21,10 @@ module.exports = {
   AppPath: appPath,
   EntryPath: path.join(appPath, 'index.js'),
   VendorPath: path.join(appPath, 'vendor.js'),
+  Themes: {
+    ThemeGreenPath: path.join(appPath, 'theme-green.scss'),
+    ThemeRedPath: path.join(appPath, 'theme-red.scss'),
+  },
   PolyfillsPath: path.join(appPath, 'polyfills.js'),
   PublicPath: publicPath,
   OutputPath: path.join(publicPath, 'dist'),
