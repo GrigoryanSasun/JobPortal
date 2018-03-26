@@ -2,6 +2,12 @@
   background-color: #fff;
   border-radius: 4px;
   padding: 30px 20px 20px 20px;
+  h3 {
+        margin: 0;
+      }
+  .bookmark-button {
+    float: right;
+  }
   .job-list-loading {
     opacity: 0.5;
   }
@@ -29,12 +35,28 @@
     }
     .job-post-description {
       font-size: 16px;
-      h3 {
-        margin: 0;
+      .fa {
+        display: inline-block;
+        width: 15px;
+        text-align: center;
       }
-      .details {
+      .location-emp-type {
         margin-top: 15px;
       }
+      .views-created-date {
+        margin-top: 10px;
+      }
+    }
+  }
+  @media (max-width: 991px) {
+    .bookmark-button {
+        float: initial;
+        margin: 10px 0 10px 0;
+    }
+  }
+  @media (max-width: 767px) {
+    .job-title {
+        margin: 10px 0 0 0;
     }
   }
 }

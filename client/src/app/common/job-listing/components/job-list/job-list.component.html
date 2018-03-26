@@ -2,13 +2,13 @@
   <div class="row" ng-class="($ctrl.jobListData.isLoading) ? 'job-list-loading': ''">
     <div class="col-md-12">
       <div class="row">
-        <div class="col-md-8 col-sm-12">
+        <div class="col-md-8 col-sm-6 col-xs-8">
           <h3 class="offer-count">{{$ctrl.jobListData.totalCount}} offer(s) found</h3>
           <h4 ng-show="$ctrl.jobListData.totalCount > 0">
             Showing page {{$ctrl.jobListData.pageNumber}} of {{$ctrl.jobListData.pageCount}}
           </h4>
         </div>
-        <div class="col-md-4 col-sm-12">
+        <div class="col-md-4 col-sm-6 col-xs-4">
           <form class="form-inline sort-order-form">
             <div class="form-group">
               <label>Sort by: </label>
@@ -22,53 +22,50 @@
       <div class="row">
         <div class="col-md-12">
           <div class="job-post row" ng-repeat="jobPost in $ctrl.jobListData.jobPosts">
-            <div class="col-md-2 job-post-image-col">
+            <div class="col-md-2 col-sm-3 col-xs-12 job-post-image-col">
               <img ng-src="{{jobPost.JobPostThumbnailUrl}}" />
             </div>
-            <div class="col-md-8 job-post-description">
-              <h3>{{jobPost.Title}}</h3>
-              <div class="row details">
-                <div class="col-md-6" title="Location">
+            <div class="col-md-10 col-sm-9 col-xs-12">
+              <div class="row">
+                <div class="col-md-9 col-sm-12 col-xs-12 job-title">
+                  <h3>{{jobPost.Title}}</h3>
+                </div>
+                <div class="col-md-3 col-sm-12 col-xs-12 bookmark-button-container">
+                  <button type="button" class="btn btn-primary bookmark-button" ng-disabled="jobPost.isBeingBookmarked" ng-click="$ctrl.bookmarkJobPost(jobPost)">
+                <i class="fa fa-bookmark" ng-show="jobPost.IsBookmarked"></i>
+                <i class="fa fa-bookmark-o" ng-hide="jobPost.IsBookmarked"></i>
+                <span>Bookmark</span>
+              </button>
+                </div>
+              </div>
+              <div class="row location-emp-type">
+                <div class="col-md-6 col-sm-12 col-xs-12" title="Location">
                   <i class="fa fa-map-marker"></i>
                   <span>{{jobPost.Location}}</span>
                 </div>
-                <div class="col-md-6" title="Employment type">
+                <div class="col-md-6 col-sm-12 col-xs-12" title="Employment type">
                   <i class="fa fa-clock-o"></i>
                   <span>{{jobPost.EmploymentType}}</span>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-md-6" title="Views">
+              <div class="row views-created-date">
+                <div class="col-md-6 col-sm-12 col-xs-12" title="Views">
                   <i class="fa fa-eye"></i>
                   <span>{{jobPost.Views}}</span>
                 </div>
-                <div class="col-md-6" title="Created at">
+                <div class="col-md-6 col-sm-12 col-xs-12" title="Created at">
                   <i class="fa fa-calendar"></i>
                   <span>{{jobPost.CreatedAt}}</span>
                 </div>
               </div>
             </div>
-            <div class="col-md-2">
-              <button type="button" class="btn btn-primary" ng-disabled="jobPost.isBeingBookmarked" ng-click="$ctrl.bookmarkJobPost(jobPost)">
-                <i class="fa fa-bookmark" ng-show="jobPost.IsBookmarked"></i>
-                <i class="fa fa-bookmark-o" ng-hide="jobPost.IsBookmarked"></i>
-                <span>Bookmark</span>
-              </button>
-            </div>
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12 pagination">
-          <ul
-            class="pagination-md"
-            uib-pagination
-            ng-show="$ctrl.jobListData.totalCount > 0"
-            direction-links="false"
-            total-items="$ctrl.jobListData.totalCount"
-            items-per-page="10"
-            ng-model="$ctrl.jobListData.pageNumber"
-            ng-change="$ctrl.notifyChangePage()">
+        <div class="col-md-12 col-sm-12 col-xs-12 pagination">
+          <ul class="pagination-md" uib-pagination ng-show="$ctrl.jobListData.totalCount > 0" direction-links="false" total-items="$ctrl.jobListData.totalCount"
+            items-per-page="10" ng-model="$ctrl.jobListData.pageNumber" ng-change="$ctrl.notifyChangePage()">
           </ul>
         </div>
       </div>
