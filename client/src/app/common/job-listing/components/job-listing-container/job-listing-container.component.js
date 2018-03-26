@@ -19,6 +19,10 @@ class JobListingContainerController {
       ByJobCategory: 1,
       ByLocation: 2
     };
+    this.showOnlyOneAdvancedFilter = false;
+    this.categoriesFilterOpen = true;
+    this.employmentTypesFilterOpen = true;
+    this.locationsFilterOpen = true;
   }
 
   bookmark(jobPost, shouldRemoveBookmark) {

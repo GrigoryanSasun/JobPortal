@@ -10,6 +10,8 @@ import { CategoryFilterComponent } from './components/category-filter/category-f
 import { EmploymentTypeFilterComponent } from './components/employment-type-filter/employment-type-filter.component';
 import { LocationFilterComponent } from './components/location-filter/location-filter.component';
 
+import { AdvancedFilterAccordionGroup } from './components/shared/advanced-filter-accordion-group/advanced-filter-accordion-group.component';
+
 
 const jobListingContainerComponentName = 'jobListingContainer';
 const jobListComponentName = 'jobList';
@@ -17,6 +19,7 @@ const searchComponentName = 'search';
 const categoryFilterComponentName = 'categoryFilter';
 const employmentTypeFilterComponentName = 'employmentTypeFilter';
 const locationFilterComponentName = 'locationFilter';
+const advancedFilterAccordionGroupName = 'advancedFilterAccordionGroup';
 
 const jobListingUrl = '/jobs';
 
@@ -30,6 +33,7 @@ export const JobListingModule = angular
   .component(categoryFilterComponentName, CategoryFilterComponent)
   .component(employmentTypeFilterComponentName, EmploymentTypeFilterComponent)
   .component(locationFilterComponentName, LocationFilterComponent)
+  .component(advancedFilterAccordionGroupName, AdvancedFilterAccordionGroup)
   .config(($locationProvider, $stateProvider, $urlRouterProvider) => {
     'ngInject';
     $locationProvider.html5Mode(true);

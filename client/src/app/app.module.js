@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 
 export const AppModule = angular
   .module('app', [
+    'ngAnimate',
     'ui.router',
     'ui.bootstrap',
     CommonModule

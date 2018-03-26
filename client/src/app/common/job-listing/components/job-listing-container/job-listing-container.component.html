@@ -5,20 +5,25 @@
       </search>
     </div>
   </div>
-  <div class="row">
-    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-      <category-filter
-        category-filter-data="$ctrl.categoryFilterData" on-filter-changed="$ctrl.changeCategoryIds(selectedItemIds)">
-      </category-filter>
-      <employment-type-filter               employment-type-filter-data="$ctrl.employmentTypeFilterData"     on-filter-changed="$ctrl.changeEmploymentTypeIds(selectedItemIds)">
-      </employment-type-filter>
-      <location-filter
-        location-filter-data="$ctrl.locationFilterData" on-filter-changed="$ctrl.changeLocationIds(selectedItemIds)">
-      </location-filter>
+  <div class="row advanced-filters-job-posts">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+      <uib-accordion close-others="$ctrl.showOnlyOneAdvancedFilter">
+        <advanced-filter-accordion-group is-open="$ctrl.categoriesFilterOpen" title="Categories">
+          <category-filter category-filter-data="$ctrl.categoryFilterData" on-filter-changed="$ctrl.changeCategoryIds(selectedItemIds)">
+          </category-filter>
+        </advanced-filter-accordion-group>
+        <advanced-filter-accordion-group is-open="$ctrl.employmentTypesFilterOpen" title="Employment Types">
+          <employment-type-filter employment-type-filter-data="$ctrl.employmentTypeFilterData" on-filter-changed="$ctrl.changeEmploymentTypeIds(selectedItemIds)">
+          </employment-type-filter>
+        </advanced-filter-accordion-group>
+        <advanced-filter-accordion-group is-open="$ctrl.locationsFilterOpen" title="Locations">
+          <location-filter location-filter-data="$ctrl.locationFilterData" on-filter-changed="$ctrl.changeLocationIds(selectedItemIds)">
+          </location-filter>
+        </advanced-filter-accordion-group>
+      </uib-accordion>
     </div>
-    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-      <job-list
-        job-list-data="$ctrl.jobListData" on-sort-order-changed="$ctrl.changeSortOrder(newSortOrder)" on-page-changed="$ctrl.changePage(newPage)"
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+      <job-list job-list-data="$ctrl.jobListData" on-sort-order-changed="$ctrl.changeSortOrder(newSortOrder)" on-page-changed="$ctrl.changePage(newPage)"
         on-bookmark-requested="$ctrl.bookmark(jobPost, shouldRemoveBookmark)">
       </job-list>
     </div>
