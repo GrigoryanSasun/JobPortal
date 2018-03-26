@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export class JobPostService {
   constructor($http, JobPostBookmarkService) {
     'ngInject';
@@ -18,9 +20,10 @@ export class JobPostService {
         JobPosts
       } = data;
       this.jobPostIdMap = {};
-      // Syncs the is being bookmarked state for all the job posts
+      // Syncs the post bookmarked state for all the job posts
       for (let i = 0; i < JobPosts.length; i++) {
         const jobPost = JobPosts[i];
+        jobPost.CreatedAt = moment(jobPost.CreatedAt).format('DD/MM/YYYY hh:mm');
         this.jobPostIdMap[jobPost.Id] = jobPost;
         this.JobPostBookmarkService.syncIsBeingBookmarkedState(jobPost);
       }

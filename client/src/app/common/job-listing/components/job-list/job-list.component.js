@@ -20,16 +20,6 @@ class JobListController {
     ];
   }
 
-  // TODO: remove when pagination component is added
-  $onChanges(changesObj) {
-    if (changesObj.jobListData && changesObj.jobListData.currentValue.pageCount){
-      this.pages = [];
-      for (let i = 0; i < changesObj.jobListData.currentValue.pageCount; i++) {
-        this.pages.push(i + 1);
-      }
-    }
-  }
-
   bookmarkJobPost(jobPost) {
     const shouldRemoveBookmark = jobPost.IsBookmarked;
     this.onBookmarkRequested({
@@ -46,9 +36,9 @@ class JobListController {
     });
   }
 
-  notifyChangePage(newPage) {
+  notifyChangePage() {
     this.onPageChanged({
-      newPage,
+      newPage: this.jobListData.pageNumber,
     });
   }
 }
