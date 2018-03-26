@@ -1,3 +1,8 @@
-<div class="container">
-  <ui-view></ui-view>
+<div>
+  <div class="loading-spinner" ng-show="$ctrl.showSpinner">
+    <i class="fa fa-spin fa-spinner"></i>
+  </div>
+  <div class="container">
+    <ui-view></ui-view>
+  </div>
 </div>
