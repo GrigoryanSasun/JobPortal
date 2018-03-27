@@ -44,7 +44,7 @@ module.exports = {
 
     contentBase: config.PublicPath,
 
-    publicPath: '/dist/',
+    publicPath: config.OutputPublicPath,
 
     // For 404 responses redirect to /
     historyApiFallback: {

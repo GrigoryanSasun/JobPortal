@@ -28,5 +28,6 @@ module.exports = {
   PolyfillsPath: path.join(appPath, 'polyfills.js'),
   PublicPath: publicPath,
   OutputPath: path.join(publicPath, 'dist'),
+  OutputPublicPath: '/Content/dist/',
   NodeModulesPath: path.join(clientPath, 'node_modules'),
 };

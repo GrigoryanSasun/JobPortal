@@ -4,12 +4,13 @@ import templateUrl from './job-listing-container.component.html';
 import './job-listing-container.component.scss';
 
 class JobListingContainerController {
-  constructor($stateParams, $state, $transitions, JobPostService) {
+  constructor($stateParams, $state, $transitions, SpinnerService, JobPostService) {
     'ngInject';
     this.$transitions = $transitions;
     this.$stateParams = $stateParams;
     this.$state = $state;
     this.JobPostService = JobPostService;
+    this.SpinnerService = SpinnerService;
     this.SORT_ORDER = {
       ByCreatedDate: 0,
       ByViews: 1
@@ -210,6 +211,7 @@ class JobListingContainerController {
       currentSortOrder: this.searchOptions.SortOrder
     };
     this.updateSearchData();
+    this.SpinnerService.setSpinnerVisibility(true);
     this.JobPostService.getFilterDataAndJobPosts(this.searchOptions)
       .then((result) => {
         if (result.success) {
@@ -231,6 +233,7 @@ class JobListingContainerController {
           this.hasErrorOccurred = true;
         }
         this.isLoading = false;
+        this.SpinnerService.setSpinnerVisibility(false);
       });
   }
 }

@@ -13,12 +13,7 @@ namespace JobPortal.Web.Controllers
     {
         private string GetDevelopmentAssetUrl(string assetName)
         {
-            return "/dist/" + assetName;
-        }
-
-        private string GetProductionAssetUrl(string assetUrl)
-        {
-            return "/Content" + assetUrl;
+            return "/Content/dist/" + assetName;
         }
 
         public ActionResult Index()
@@ -46,17 +41,17 @@ namespace JobPortal.Web.Controllers
                     var vendorCssUrl = assets.vendor.css;
                     if (vendorCssUrl != null)
                     {
-                        stylesheetUrls.Add(this.GetProductionAssetUrl(vendorCssUrl.ToString()));
+                        stylesheetUrls.Add(vendorCssUrl.ToString());
                     }
                     var mainCssUrl = assets.main.css;
                     if (mainCssUrl != null)
                     {
-                        stylesheetUrls.Add(this.GetProductionAssetUrl(mainCssUrl.ToString()));
+                        stylesheetUrls.Add(mainCssUrl.ToString());
                     }
-                    scriptUrls.Add(this.GetProductionAssetUrl(assets.manifest.js.ToString()));
-                    scriptUrls.Add(this.GetProductionAssetUrl(assets.polyfills.js.ToString()));
-                    scriptUrls.Add(this.GetProductionAssetUrl(assets.vendor.js.ToString()));
-                    scriptUrls.Add(this.GetProductionAssetUrl(assets.main.js.ToString()));
+                    scriptUrls.Add(assets.manifest.js.ToString());
+                    scriptUrls.Add(assets.polyfills.js.ToString());
+                    scriptUrls.Add(assets.vendor.js.ToString());
+                    scriptUrls.Add(assets.main.js.ToString());
                     responseViewModel.StylesheetUrls = stylesheetUrls;
                     responseViewModel.JavascriptUrls = scriptUrls;
                 }

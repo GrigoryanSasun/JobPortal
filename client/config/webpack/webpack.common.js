@@ -36,7 +36,7 @@ module.exports = {
   },
   output: {
     path: config.OutputPath,
-    publicPath: '/dist/',
+    publicPath: config.OutputPublicPath,
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
