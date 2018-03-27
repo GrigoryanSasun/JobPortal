@@ -1,0 +1,13 @@
+<div class="theme-settings">
+  <div class="btn-group" uib-dropdown>
+    <button type="button" class="btn btn-default" uib-dropdown-toggle>
+        <i class="fa fa-cog"></i>
+    </button>
+    <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+      <li role="menuitem" ng-class="(theme.ThemeId === $ctrl.selectedThemeId) ? 'active': ''" ng-repeat="theme in $ctrl.themes"><a href="javascript:void(0)" ng-click="$ctrl.changeTheme(theme)">
+        <div class="theme-indicator" ng-style="{'background-color': theme.UIMainColor }"></div>
+        {{theme.UIDescription}}
+      </a></li>
+    </ul>
+  </div>
+</div>

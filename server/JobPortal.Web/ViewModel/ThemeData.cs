@@ -10,6 +10,7 @@ namespace JobPortal.Web.ViewModel
         public string ThemeId { get; set; }
         public bool IsDefault { get; set; }
         public string UIMainColor { get; set; }
+        public string UIDescription { get; set; }
         public string StylesheetUrl { get; set; }
     }
 }

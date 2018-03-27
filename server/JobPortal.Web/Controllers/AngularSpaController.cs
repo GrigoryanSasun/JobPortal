@@ -48,19 +48,22 @@ namespace JobPortal.Web.Controllers
                         ThemeId = "default_theme",
                         IsDefault = true,
                         StylesheetUrl = this.GetDevelopmentAssetUrl("defaultTheme.css"),
-                        UIMainColor = "#337ab7"
+                        UIMainColor = "#337ab7",
+                        UIDescription = "Default theme"
                     },
                     new ThemeData
                     {
                         ThemeId = "green_theme",
                         StylesheetUrl = this.GetDevelopmentAssetUrl("greenTheme.css"),
-                        UIMainColor = "green"
+                        UIMainColor = "green",
+                        UIDescription = "Green theme"
                     },
                     new ThemeData
                     {
                         ThemeId = "red_theme",
                         StylesheetUrl = this.GetDevelopmentAssetUrl("redTheme.css"),
-                        UIMainColor = "red"
+                        UIMainColor = "red",
+                        UIDescription = "Red theme"
                     }
                 };
 

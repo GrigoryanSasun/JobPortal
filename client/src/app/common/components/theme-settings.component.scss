@@ -1,0 +1,16 @@
+.theme-settings {
+  position: fixed;
+  right: 0;
+  z-index: 900;
+  .theme-indicator {
+    display: inline-block;
+    vertical-align: bottom;
+    width: 20px;
+    height: 20px;
+  }
+  li.active {
+    .theme-indicator {
+      border: 1px solid #fff;
+    }
+  }
+}
