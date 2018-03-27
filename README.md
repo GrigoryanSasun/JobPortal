@@ -46,3 +46,34 @@ Here is the description of all the projects:
 * JobPortal.DataAccess.Core - contains the models and the contracts of the data access layer. The interfaces and models are separated into this project to ensure the dependency inversion principle, the dependent layers reference this project, not the actual implementations which are in the JobPortal.DataAccess project,
 * JobPortal.DataAccess - contains the actual implementations for the contracts from the JobPortal.DataAccess.Core project,
 * JobPortal.Common - contains common code for all the projects
+
+#### Theming
+The application uses bootstrap-sass (https://github.com/twbs/bootstrap-sass) which is a SASS powered version of Bootrstrap 3. Theming is implemented in a way that each theme should provide values for such variables like $brand-primary which is the primary color, $brand-success which is the success color, etc. To create a new theme, the following steps should be done:
+
+* Create an scss file (for example, fancy-theme.scss) in the `client/src/app/themes` folder with the following content:
+
+```
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+// Override bootstrap variables here
+$brand-success: custom_value_here;
+$brand-primary: custom_value_here;
+etc...
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+```
+
+* In the `server/JobPortal.Web/Themes.json` file add an entry for the theme:
+```
+    {
+        "id": "them_id", // should be unique string
+        "is_default": true, // whether is the default theme
+        "filename": "fancy-theme", // should match with the filename of the theme WITHOUT extension
+        "ui_main_color": "#337ab7", // the color used when showing the theme in the app
+        "ui_description": "Default theme" // the description of the theme in the ui
+    }
+```
+
+* When adding a theme or modifying an existing theme, the webpack dev server and the backend api should be restarted.
+
+#### How theming works
+
+The webpack is configured to read the `Themes.json` file and create a separate entry for each theme. The backend api, when serving the initial html request, reads the `Themes.json` file and creates the list of themes on the `window` object. The client side accesses this list and when the theme is changed, it sets the theme link tag's href attribute to the url of the newly selected theme.
