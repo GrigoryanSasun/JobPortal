@@ -22,11 +22,14 @@ namespace JobPortal.Web.Controllers
             var responseViewModel = new AngularSpaResponseViewModel();
             if (isInDevelopment)
             {
+                var defaultThemeCss = this.GetDevelopmentAssetUrl("defaultTheme.css"); 
+                var vendorCss = this.GetDevelopmentAssetUrl("vendor.css");
+                var mainCss = this.GetDevelopmentAssetUrl("main.css");
                 var manifestScript = this.GetDevelopmentAssetUrl("manifest.js");
                 var polyfillsScript = this.GetDevelopmentAssetUrl("polyfills.js");
                 var vendorScript = this.GetDevelopmentAssetUrl("vendor.js");
                 var mainScript = this.GetDevelopmentAssetUrl("main.js");
-                responseViewModel.StylesheetUrls = new string[0];
+                responseViewModel.StylesheetUrls = new string[3] { defaultThemeCss, vendorCss, mainCss };
                 responseViewModel.JavascriptUrls = new string[4] { manifestScript, polyfillsScript, vendorScript, mainScript };
             }
             else

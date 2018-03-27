@@ -11,8 +11,9 @@ module.exports = {
     main: config.EntryPath,
     vendor: config.VendorPath,
     polyfills: config.PolyfillsPath,
-    themeGreen: config.Themes.ThemeGreenPath,
-    themeRed: config.Themes.ThemeRedPath
+    defaultTheme: config.Themes.DefaultPath,
+    greenTheme: config.Themes.ThemeGreenPath,
+    redTheme: config.Themes.ThemeRedPath
   },
   resolve: {
     extensions: ['.js', '.jsx'],

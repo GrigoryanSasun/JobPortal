@@ -1,21 +1,16 @@
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const config = require('../config');
 
-// Style loader is used to facilitate HMR in development
-const styleLoaders = require('./style-loaders')(/* useStyleLoader */ true);
+const styleLoaders = require('./style-loaders')(/* useStyleLoader */ false);
 
-const { cssLoaders, sassLoaders } = styleLoaders;
+const { cssLoaders: cssLoaders, sassLoaders: sassLoaders } = styleLoaders;
 
 const backendServerPort = config.Server.BackendServerPort;
 const webpackDevServerPort = config.Server.WebpackDevServerPort;
 
 module.exports = {
   devtool: 'inline-source-map',
-  entry: {
-    main: [
-      config.EntryPath,
-    ],
-  },
   module: {
     rules: [
       {
@@ -25,11 +20,15 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: cssLoaders,
+        use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
+          use: cssLoaders,
+        }))
       },
       {
         test: /\.scss$/,
-        use: sassLoaders,
+        use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
+          use: sassLoaders,
+        }))
       },
     ],
   },
@@ -54,8 +53,8 @@ module.exports = {
       /*
           Proxies the / and /api url requests to the backend
       */
-      '/': `http://localhost:${ backendServerPort }`,
-      '/api': `http://localhost:${ backendServerPort }/api`,
+      '/': `http://localhost:${backendServerPort}`,
+      '/api': `http://localhost:${backendServerPort}/api`,
     },
     overlay: true,
     stats: {
@@ -72,6 +71,10 @@ module.exports = {
     },
   },
   plugins: [
+    new ExtractTextPlugin({
+      filename: '[name].css',
+      allChunks: true
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
   ],

@@ -8,12 +8,20 @@ module.exports = (useStyleLoader) => {
     },
     {
       loader: 'postcss-loader',
+      options: {
+        // bootstrap sass requires precision 8 (https://github.com/twbs/bootstrap-sass)
+        precision: 8
+      },
     },
   ]);
 
   const sassLoaders = cssLoaders.concat([
     {
       loader: 'sass-loader',
+      options: {
+        // bootstrap sass requires precision 8 (https://github.com/twbs/bootstrap-sass)
+        precision: 8
+      },
     },
   ]);
 

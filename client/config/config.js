@@ -8,6 +8,7 @@ const publicPath = path.join(serverPath, 'Content');
 const clientPath = path.join(rootPath, 'client');
 const srcPath = path.join(clientPath, 'src');
 const appPath = path.join(srcPath, 'app');
+const themesPath = path.join(appPath, 'themes');
 
 const backendPort = process.env.BACKEND_SERVER_PORT || 8000;
 const webpackDevServerPort = process.env.WEBPACK_DEV_SERVER_PORT || 8080;
@@ -22,8 +23,9 @@ module.exports = {
   EntryPath: path.join(appPath, 'index.js'),
   VendorPath: path.join(appPath, 'vendor.js'),
   Themes: {
-    ThemeGreenPath: path.join(appPath, 'theme-green.scss'),
-    ThemeRedPath: path.join(appPath, 'theme-red.scss'),
+    DefaultPath: path.join(themesPath, 'theme-default.scss'),
+    ThemeGreenPath: path.join(themesPath, 'theme-green.scss'),
+    ThemeRedPath: path.join(themesPath, 'theme-red.scss'),
   },
   PolyfillsPath: path.join(appPath, 'polyfills.js'),
   PublicPath: publicPath,
