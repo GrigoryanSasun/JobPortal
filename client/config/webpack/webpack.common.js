@@ -3,18 +3,24 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = require('../config');
+const themes = require('../../../server/JobPortal.Web/Themes.json');
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
+const entry = {
+  main: config.EntryPath,
+  vendor: config.VendorPath,
+  polyfills: config.PolyfillsPath
+};
+
+// Sets all the theme files as entry points
+for (let i = 0; i < themes.length; i++) {
+  const theme = themes[i];
+  entry[theme.filename] = config.getThemePath(theme.filename);
+}
+
 module.exports = {
-  entry: {
-    main: config.EntryPath,
-    vendor: config.VendorPath,
-    polyfills: config.PolyfillsPath,
-    defaultTheme: config.Themes.DefaultPath,
-    greenTheme: config.Themes.ThemeGreenPath,
-    redTheme: config.Themes.ThemeRedPath
-  },
+  entry,
   resolve: {
     extensions: ['.js', '.jsx'],
   },

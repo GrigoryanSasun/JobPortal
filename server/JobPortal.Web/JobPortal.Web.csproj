@@ -138,6 +138,7 @@
     <Compile Include="Controllers\Base\ApiControllerBase.cs" />
     <Compile Include="Controllers\FilterDataController.cs" />
     <Compile Include="Controllers\JobPostsController.cs" />
+    <Compile Include="DeserializedTheme.cs" />
     <Compile Include="Model\AppEmploymentTypeResult.cs" />
     <Compile Include="Model\AppJobCategoryResult.cs" />
     <Compile Include="Model\AppJobPostFilterDataResult.cs" />
@@ -160,6 +161,7 @@
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
     <Content Include="Views\AngularSpa\Index.cshtml" />
+    <Content Include="Themes.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

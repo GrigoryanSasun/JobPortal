@@ -1,0 +1,23 @@
+﻿[
+  {
+    "id": "default_theme",
+    "is_default": true,
+    "filename": "themeDefault",
+    "ui_main_color": "#337ab7",
+    "ui_description": "Default theme"
+  },
+  {
+    "id": "green_theme",
+    "is_default": false,
+    "filename": "themeGreen",
+    "ui_main_color": "green",
+    "ui_description": "Green theme"
+  },
+  {
+    "id": "red_theme",
+    "is_default": false,
+    "filename": "themeRed",
+    "ui_main_color": "red",
+    "ui_description": "Red theme"
+  }
+]

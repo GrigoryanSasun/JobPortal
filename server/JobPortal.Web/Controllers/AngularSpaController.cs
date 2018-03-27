@@ -16,57 +16,61 @@ namespace JobPortal.Web.Controllers
             return "/Content/dist/" + assetName;
         }
 
+        private AngularSpaResponseViewModel GetDevelopmentReponseViewModel()
+        {
+            var result = new AngularSpaResponseViewModel();
+            StylesheetData defaultThemeData = null;
+            var vendorCss = new StylesheetData
+            {
+                StylesheetUrl = this.GetDevelopmentAssetUrl("vendor.css")
+            };
+            var mainCss = new StylesheetData
+            {
+                StylesheetUrl = this.GetDevelopmentAssetUrl("main.css")
+            };
+            var manifestScript = this.GetDevelopmentAssetUrl("manifest.js");
+            var polyfillsScript = this.GetDevelopmentAssetUrl("polyfills.js");
+            var vendorScript = this.GetDevelopmentAssetUrl("vendor.js");
+            var mainScript = this.GetDevelopmentAssetUrl("main.js");
+            using (StreamReader r = new StreamReader(Server.MapPath("~/Themes.json")))
+            {
+                string json = r.ReadToEnd();
+                var themes = JsonConvert.DeserializeObject<DeserializedTheme[]>(json);
+                var themeDatas = new List<ThemeData>();
+                foreach (var theme in themes)
+                {
+                    var themeData = new ThemeData
+                    {
+                        ThemeId = theme.id,
+                        IsDefault = theme.is_default,
+                        StylesheetUrl = this.GetDevelopmentAssetUrl(theme.filename + ".css"),
+                        UIMainColor = theme.ui_main_color,
+                        UIDescription = theme.ui_description
+                    };
+                    themeDatas.Add(themeData);
+                    if (themeData.IsDefault)
+                    {
+                        defaultThemeData = new StylesheetData
+                        {
+                            IsTheme = true,
+                            StylesheetUrl = themeData.StylesheetUrl
+                        };
+                    }
+                }
+                result.Themes = themeDatas;
+            }
+            result.Stylesheets = new StylesheetData[3] { defaultThemeData, vendorCss, mainCss };
+            result.Scripts = new string[4] { manifestScript, polyfillsScript, vendorScript, mainScript };
+            return result;
+        }
+
         public ActionResult Index()
         {
             var isInDevelopment = HttpContext.IsDebuggingEnabled;
-            var responseViewModel = new AngularSpaResponseViewModel();
+            AngularSpaResponseViewModel result = null;
             if (isInDevelopment)
             {
-                var defaultThemeCss = new StylesheetData
-                {
-                    IsTheme = true,
-                    StylesheetUrl = this.GetDevelopmentAssetUrl("defaultTheme.css")
-                }; 
-                var vendorCss = new StylesheetData
-                {
-                    StylesheetUrl = this.GetDevelopmentAssetUrl("vendor.css")
-                };
-                var mainCss = new StylesheetData
-                {
-                    StylesheetUrl = this.GetDevelopmentAssetUrl("main.css")
-                };
-                var manifestScript = this.GetDevelopmentAssetUrl("manifest.js");
-                var polyfillsScript = this.GetDevelopmentAssetUrl("polyfills.js");
-                var vendorScript = this.GetDevelopmentAssetUrl("vendor.js");
-                var mainScript = this.GetDevelopmentAssetUrl("main.js");
-                responseViewModel.Stylesheets = new StylesheetData[3] { defaultThemeCss, vendorCss, mainCss };
-                responseViewModel.Scripts = new string[4] { manifestScript, polyfillsScript, vendorScript, mainScript };
-                responseViewModel.Themes = new ThemeData[3]
-                {
-                    new ThemeData
-                    {
-                        ThemeId = "default_theme",
-                        IsDefault = true,
-                        StylesheetUrl = this.GetDevelopmentAssetUrl("defaultTheme.css"),
-                        UIMainColor = "#337ab7",
-                        UIDescription = "Default theme"
-                    },
-                    new ThemeData
-                    {
-                        ThemeId = "green_theme",
-                        StylesheetUrl = this.GetDevelopmentAssetUrl("greenTheme.css"),
-                        UIMainColor = "green",
-                        UIDescription = "Green theme"
-                    },
-                    new ThemeData
-                    {
-                        ThemeId = "red_theme",
-                        StylesheetUrl = this.GetDevelopmentAssetUrl("redTheme.css"),
-                        UIMainColor = "red",
-                        UIDescription = "Red theme"
-                    }
-                };
-
+                result = this.GetDevelopmentReponseViewModel();
             }
             else
             {
@@ -92,11 +96,11 @@ namespace JobPortal.Web.Controllers
                     scriptUrls.Add(assets.vendor.js.ToString());
                     scriptUrls.Add(assets.main.js.ToString());
                     //responseViewModel.Stylesheets = stylesheetUrls;
-                    responseViewModel.Scripts = scriptUrls;
+                    result.Scripts = scriptUrls;
                 }
 
             }
-            return View(responseViewModel);
+            return View(result);
         }
     }
 }

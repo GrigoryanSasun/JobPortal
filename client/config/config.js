@@ -22,14 +22,12 @@ module.exports = {
   AppPath: appPath,
   EntryPath: path.join(appPath, 'index.js'),
   VendorPath: path.join(appPath, 'vendor.js'),
-  Themes: {
-    DefaultPath: path.join(themesPath, 'theme-default.scss'),
-    ThemeGreenPath: path.join(themesPath, 'theme-green.scss'),
-    ThemeRedPath: path.join(themesPath, 'theme-red.scss'),
-  },
   PolyfillsPath: path.join(appPath, 'polyfills.js'),
   PublicPath: publicPath,
   OutputPath: path.join(publicPath, 'dist'),
   OutputPublicPath: '/Content/dist/',
   NodeModulesPath: path.join(clientPath, 'node_modules'),
+  getThemePath: (themeName) => {
+    return path.join(themesPath, themeName + '.scss')
+  },
 };
