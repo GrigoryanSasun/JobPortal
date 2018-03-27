@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\JsonHelper.cs" />
     <Compile Include="Model\Base\CategoryResultBase.cs" />
     <Compile Include="Model\Base\EmploymentTypeResultBase.cs" />
     <Compile Include="Model\Base\JobPostInputModelBase.cs" />
