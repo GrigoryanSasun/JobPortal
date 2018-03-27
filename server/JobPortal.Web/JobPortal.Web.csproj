@@ -153,6 +153,8 @@
     <Compile Include="Model\AppJobPostListResult.cs" />
     <Compile Include="Model\AppJobPostResult.cs" />
     <Compile Include="Model\AppJobPostSearchInputModel.cs" />
+    <Compile Include="ViewModel\StylesheetData.cs" />
+    <Compile Include="ViewModel\ThemeData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

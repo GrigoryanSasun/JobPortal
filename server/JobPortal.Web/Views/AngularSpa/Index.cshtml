@@ -10,17 +10,22 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <base href="/" />
-    @foreach (var styleUrl in Model.StylesheetUrls)
+    @foreach (var styleData in Model.Stylesheets)
     {
-        <link rel="stylesheet" type="text/css" href="@styleUrl" />
+        <link rel="stylesheet" type="text/css" href="@styleData.StylesheetUrl" @Html.Raw(styleData.IsTheme ? "id=\"theme\"": "") />
     }
     <title>Job portal application</title>
+    <script>
+        window.JobPortal = {
+            themes: @Html.Raw(Json.Encode(Model.Themes))
+        };
+    </script>
 </head>
 <body>
     <app></app>
 
     <!-- Client side scripts -->
-    @foreach (var scriptUrl in Model.JavascriptUrls)
+    @foreach (var scriptUrl in Model.Scripts)
     {
         <script type="text/javascript" src="@scriptUrl"></script>
     }

@@ -22,15 +22,48 @@ namespace JobPortal.Web.Controllers
             var responseViewModel = new AngularSpaResponseViewModel();
             if (isInDevelopment)
             {
-                var defaultThemeCss = this.GetDevelopmentAssetUrl("defaultTheme.css"); 
-                var vendorCss = this.GetDevelopmentAssetUrl("vendor.css");
-                var mainCss = this.GetDevelopmentAssetUrl("main.css");
+                var defaultThemeCss = new StylesheetData
+                {
+                    IsTheme = true,
+                    StylesheetUrl = this.GetDevelopmentAssetUrl("defaultTheme.css")
+                }; 
+                var vendorCss = new StylesheetData
+                {
+                    StylesheetUrl = this.GetDevelopmentAssetUrl("vendor.css")
+                };
+                var mainCss = new StylesheetData
+                {
+                    StylesheetUrl = this.GetDevelopmentAssetUrl("main.css")
+                };
                 var manifestScript = this.GetDevelopmentAssetUrl("manifest.js");
                 var polyfillsScript = this.GetDevelopmentAssetUrl("polyfills.js");
                 var vendorScript = this.GetDevelopmentAssetUrl("vendor.js");
                 var mainScript = this.GetDevelopmentAssetUrl("main.js");
-                responseViewModel.StylesheetUrls = new string[3] { defaultThemeCss, vendorCss, mainCss };
-                responseViewModel.JavascriptUrls = new string[4] { manifestScript, polyfillsScript, vendorScript, mainScript };
+                responseViewModel.Stylesheets = new StylesheetData[3] { defaultThemeCss, vendorCss, mainCss };
+                responseViewModel.Scripts = new string[4] { manifestScript, polyfillsScript, vendorScript, mainScript };
+                responseViewModel.Themes = new ThemeData[3]
+                {
+                    new ThemeData
+                    {
+                        ThemeId = "default_theme",
+                        IsDefault = true,
+                        StylesheetUrl = this.GetDevelopmentAssetUrl("defaultTheme.css"),
+                        UIMainColor = "#337ab7"
+                    },
+                    new ThemeData
+                    {
+                        ThemeId = "green_theme",
+                        StylesheetUrl = this.GetDevelopmentAssetUrl("greenTheme.css"),
+                        UIMainColor = "green"
+                    },
+                    new ThemeData
+                    {
+                        ThemeId = "red_theme",
+                        StylesheetUrl = this.GetDevelopmentAssetUrl("redTheme.css"),
+                        UIMainColor = "red"
+                    }
+                };
+
             }
             else
             {
@@ -55,8 +88,8 @@ namespace JobPortal.Web.Controllers
                     scriptUrls.Add(assets.polyfills.js.ToString());
                     scriptUrls.Add(assets.vendor.js.ToString());
                     scriptUrls.Add(assets.main.js.ToString());
-                    responseViewModel.StylesheetUrls = stylesheetUrls;
-                    responseViewModel.JavascriptUrls = scriptUrls;
+                    //responseViewModel.Stylesheets = stylesheetUrls;
+                    responseViewModel.Scripts = scriptUrls;
                 }
 
             }
