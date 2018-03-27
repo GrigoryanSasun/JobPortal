@@ -1,2 +1,5 @@
 $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+// Override bootstrap variables here
+$brand-success: #18466d;
+$brand-primary: #347ab7;
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";

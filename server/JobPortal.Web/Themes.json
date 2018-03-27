@@ -12,12 +12,5 @@
     "filename": "themeGreen",
     "ui_main_color": "green",
     "ui_description": "Green theme"
-  },
-  {
-    "id": "red_theme",
-    "is_default": false,
-    "filename": "themeRed",
-    "ui_main_color": "red",
-    "ui_description": "Red theme"
   }
 ]
